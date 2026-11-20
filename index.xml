@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Joey Ran the Stats</title>
+<link>https://joeyzeee.github.io/</link>
+<atom:link href="https://joeyzeee.github.io/index.xml" rel="self" type="application/rss+xml"/>
+<description></description>
+<generator>quarto-1.11.9</generator>
+<lastBuildDate>Thu, 19 Nov 2026 06:00:00 GMT</lastBuildDate>
+<item>
+  <title>Welcome!</title>
+  <link>https://joeyzeee.github.io/posts/welcome/</link>
+  <description><![CDATA[ 
+<a class="back-link" href="../../">← Back to all posts</a>
+
+
+
+
+
+<p>This is a blog about the beautiful game of baseball and the numbers behind it. I’m Joey, a freshman at Northwestern studying math, and I’m starting this to get some more practice working with real baseball data and to write about anything interesting I find.</p>
+<p>The code for everything I write will be on <a href="https://github.com/JoeyZeee">GitHub</a>, so you can check my work.</p>
+<p>More to come soon, so stay tuned.</p>
+
+
+
+ ]]></description>
+  <category>intro</category>
+  <guid>https://joeyzeee.github.io/posts/welcome/</guid>
+  <pubDate>Thu, 19 Nov 2026 06:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>
