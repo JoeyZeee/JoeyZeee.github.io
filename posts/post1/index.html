@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-11-20">
+
+<title>Inside Pete Crow-Armstrong’s MVP Transformation – Joey Ran the Stats</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-d31a0c91b01e363be7b7a36e602e2c70.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Inside Pete Crow-Armstrong’s MVP Transformation – Joey Ran the Stats">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://joeyzeee.github.io/posts/post1/PeteCrow.jpg">
+<meta property="og:site_name" content="Joey Ran the Stats">
+<meta property="og:image:alt" content="Pete Crow-Armstrong of the Chicago Cubs">
+<meta property="og:image:height" content="432">
+<meta property="og:image:width" content="768">
+<meta name="twitter:title" content="Inside Pete Crow-Armstrong’s MVP Transformation – Joey Ran the Stats">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://joeyzeee.github.io/posts/post1/PeteCrow.jpg">
+<meta name="twitter:image:alt" content="Pete Crow-Armstrong of the Chicago Cubs">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Joey Ran the Stats</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JoeyZeee"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Inside Pete Crow-Armstrong’s MVP Transformation</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Player Analysis</div>
+                <div class="quarto-category">Cubs</div>
+                <div class="quarto-category">Baseball Analytics</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">November 20, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content" tabindex="-1">
+<a class="back-link" href="../../">← Back to all posts</a>
+
+
+
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="PeteCrow.jpg" class="img-fluid figure-img" style="width:100.0%" alt="Pete Crow-Armstrong of the Chicago Cubs"></p>
+<figcaption>Pete Crow-Armstrong celebrates during a game against the Colorado Rockies at Wrigley Field on June 16, 2026.</figcaption>
+</figure>
+</div>
+<p><small>CHICAGO, ILLINOIS – JUNE 16: Pete Crow-Armstrong #4 of the Chicago Cubs points toward the field during a matchup against the Colorado Rockies at Wrigley Field on June 16, 2026, in Chicago, Illinois. Photo by Matt Dirksen/Chicago Cubs/Getty Images.</small></p>
+<section id="from-a-slow-start-to-an-mvp-season" class="level2">
+<h2 class="anchored" data-anchor-id="from-a-slow-start-to-an-mvp-season">From a Slow Start to an MVP Season</h2>
+<p>Pete Crow-Armstrong had a season most baseball players can only dream of.</p>
+<p>In 2026, the Chicago Cubs center fielder hit <strong>45 home runs, stole 41 bases, drove in 107 runs, and posted a .280/.372/.570 slash line</strong>. He became just the seventh player in Major League Baseball history to join the coveted 40/40 club, his 10.6 fWAR led all of baseball, and the historic campaign earned him a unanimous National League Most Valuable Player award.</p>
+<p>But just a few months earlier, many Cubs fans were calling for Crow-Armstrong to be benched due to his inconsistency at the plate. His aggressive approach left him vulnerable to pitches outside the strike zone, and his existing swing mechanics weren’t consistently translating his considerable athleticism into productive contact.</p>
+<p>Then, something drastic changed.</p>
+<p>In May, PCA made a series of adjustments that would fundamentally reshape his season. He narrowed his stance, moved closer to the plate, repositioned his hands, and completely altered his mental approach to his at-bats.</p>
+<p>So, how exactly did a hitter who struggled through the opening month of the season become the most valuable player in the National League?</p>
+<p><strong>Well, Joey Ran the Stats.</strong></p>
+<p>Using Python and Statcast pitch-level data, I wanted to investigate two parts of PCA’s transformation:</p>
+<ol type="1">
+<li><strong>The mental shift:</strong> Did he actually become more selective at the plate, and could that change be quantified?</li>
+<li><strong>The mechanical shift:</strong> Did his mechanical adjustments translate into better contact quality?</li>
+</ol>
+<p>Rather than simply comparing his statistics at the beginning and end of the season, I wanted to examine the individual pitches that make up those statistics. By looking at his swing decisions, pitch locations, and batted-ball outcomes, we can get a much better understanding of what actually changed, and how sustainable this production is.</p>
+</section>
+<section id="building-the-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="building-the-dataset">1. Building the Dataset</h2>
+<p>Before analyzing anything, I needed the data.</p>
+<p>I used the <code>pybaseball</code> library to retrieve Statcast data directly from Baseball Savant. Specifically, I pulled every pitch recorded for Crow-Armstrong throughout the 2026 regular season.</p>
+<p>The dataset includes information about each pitch, including its location, velocity, outcome, and the resulting batted-ball measurements.</p>
+<section id="retrieving-statcast-data" class="level3">
+<h3 class="anchored" data-anchor-id="retrieving-statcast-data">Retrieving Statcast Data</h3>
+<p>I started by importing the libraries needed for the analysis and retrieving PCA’s pitch-level data using his MLBAM player ID.</p>
+<div id="09e53f3c" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pybaseball <span class="im">import</span> statcast_batter, cache</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> calendar</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>cache.enable()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>PCA_ID <span class="op">=</span> <span class="dv">691718</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> statcast_batter(</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"2026-03-20"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"2026-10-05"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    PCA_ID</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep regular-season games only</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">"game_type"</span>] <span class="op">==</span> <span class="st">"R"</span>].copy()</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"game_date"</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">"game_date"</span>])</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Group late March games into April</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"month"</span>] <span class="op">=</span> df[<span class="st">"game_date"</span>].dt.month.clip(lower<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="bu">len</span>(df),</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pitches from"</span>,</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"game_date"</span>].<span class="bu">min</span>().date(),</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"to"</span>,</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"game_date"</span>].<span class="bu">max</span>().date()</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This returned <strong>2,922 pitches</strong>, covering March 26 through September 27.</p>
+<p>I also grouped the late-March games into April so that the monthly comparisons would be easier to interpret.</p>
+<p>With the dataset ready, I could start examining the two major components of PCA’s transformation.</p>
+</section>
+</section>
+<section id="the-mental-shift-becoming-a-more-selective-hitter" class="level2">
+<h2 class="anchored" data-anchor-id="the-mental-shift-becoming-a-more-selective-hitter">2. The Mental Shift: Becoming a More Selective Hitter</h2>
+<p>One of the biggest changes in PCA’s approach was his ability to recognize which pitches deserved his aggression.</p>
+<p>In 2025, his chase rate was 41.7%, meaning he swung at more than four out of every ten pitches outside the strike zone.</p>
+<p>That tendency gave pitchers an easy way to attack him. Rather than challenging him directly, they could expand the strike zone and rely on his willingness to chase.</p>
+<p>In May 2026, however, his approach began to change. MLB reported that his strikeout rate dropped from 29.7% in March and April to 21.3% in May. His whiff rate also fell from 29.9% to 23.7%.</p>
+<p>I wanted to see whether these improvements were reflected in the actual pitches he chose to swing at.</p>
+<section id="defining-swing-decisions" class="level3">
+<h3 class="anchored" data-anchor-id="defining-swing-decisions">Defining Swing Decisions</h3>
+<p>The first step was identifying which pitches resulted in a swing and which resulted in a miss.</p>
+<p>Statcast records pitch outcomes through the <code>description</code> column. I created two lists to classify these outcomes.</p>
+<div id="d9c95a97" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># All possible swing outcomes</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>SWINGS <span class="op">=</span> [</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"swinging_strike"</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"swinging_strike_blocked"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"foul"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"foul_tip"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"hit_into_play"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"foul_bunt"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"missed_bunt"</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># All possible swing-and-miss outcomes</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>WHIFFS <span class="op">=</span> [</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"swinging_strike"</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"swinging_strike_blocked"</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"missed_bunt"</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"swing"</span>] <span class="op">=</span> df[<span class="st">"description"</span>].isin(SWINGS)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"whiff"</span>] <span class="op">=</span> df[<span class="st">"description"</span>].isin(WHIFFS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>These Boolean columns allowed me to calculate swing and whiff rates directly from the pitch-level data.</p>
+<p>For example, the swing rate is simply the percentage of pitches on which PCA swung. Chase rate is the percentage of pitches outside the strike zone on which he swung.</p>
+</section>
+<section id="finding-the-turning-point" class="level3">
+<h3 class="anchored" data-anchor-id="finding-the-turning-point">Finding the Turning Point</h3>
+<p>I chose May 29 as the dividing point for my before-and-after analysis.</p>
+<div id="c6f586ab" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>turnaround <span class="op">=</span> <span class="st">"2026-05-29"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>before <span class="op">=</span> df[df[<span class="st">"game_date"</span>] <span class="op">&lt;</span> turnaround]</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>after <span class="op">=</span> df[df[<span class="st">"game_date"</span>] <span class="op">&gt;=</span> turnaround]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This gave me two samples:</p>
+<ul>
+<li>Before: 892 pitches</li>
+<li>After: 2,030 pitches</li>
+</ul>
+<p>I then calculated the swing rate, chase rate, and whiff rate for each period.</p>
+<div id="62949ae3" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, data <span class="kw">in</span> [(<span class="st">"Before"</span>, before), (<span class="st">"After"</span>, after)]:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    out_of_zone <span class="op">=</span> data[data[<span class="st">"zone"</span>] <span class="op">&gt;=</span> <span class="dv">11</span>]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(name)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Swing rate:"</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">round</span>(data[<span class="st">"swing"</span>].mean(), <span class="dv">3</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Chase rate:"</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">round</span>(out_of_zone[<span class="st">"swing"</span>].mean(), <span class="dv">3</span>)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Whiff rate:"</span>,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        <span class="bu">round</span>(</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>            data[<span class="st">"whiff"</span>].<span class="bu">sum</span>() <span class="op">/</span> data[<span class="st">"swing"</span>].<span class="bu">sum</span>(),</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>            <span class="dv">3</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The results were particularly interesting.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Metric</th>
+<th style="text-align: right;">Before</th>
+<th style="text-align: right;">After</th>
+<th style="text-align: right;">Change</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Swing Rate</td>
+<td style="text-align: right;">52.6%</td>
+<td style="text-align: right;">48.3%</td>
+<td style="text-align: right;">-4.3 pp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chase Rate</td>
+<td style="text-align: right;">39.3%</td>
+<td style="text-align: right;">32.0%</td>
+<td style="text-align: right;">-7.3 pp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Whiff Rate</td>
+<td style="text-align: right;">25.6%</td>
+<td style="text-align: right;">23.5%</td>
+<td style="text-align: right;">-2.1 pp</td>
+</tr>
+</tbody>
+</table>
+<p><strong>[INSERT GRAPH 1: Before vs.&nbsp;After Swing Rate and Chase Rate]</strong></p>
+<p><em>Figure 1. Changes in Crow-Armstrong’s swing decisions before and after May 29.</em></p>
+<p>The most important number is his chase rate.</p>
+<p>After May 29, PCA chased pitches outside the strike zone just 32.0% of the time, compared with 39.3% beforehand.</p>
+<p>But his overall swing rate also declined, which raises an important question: Was he simply becoming more passive?</p>
+<p>To answer that, I needed to distinguish between pitches inside and outside the strike zone.</p>
+<div id="4c96d082" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> []</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>periods <span class="op">=</span> [</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Before turnaround"</span>, before),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"After turnaround"</span>, after)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, data <span class="kw">in</span> periods:</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    in_zone <span class="op">=</span> data[data[<span class="st">"zone"</span>].between(<span class="dv">1</span>, <span class="dv">9</span>)]</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    out_zone <span class="op">=</span> data[data[<span class="st">"zone"</span>].between(<span class="dv">11</span>, <span class="dv">14</span>)]</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    total_swings <span class="op">=</span> data[<span class="st">"swing"</span>].<span class="bu">sum</span>()</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    results.append({</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Period"</span>: name,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Pitches"</span>: <span class="bu">len</span>(data),</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Swings"</span>: <span class="bu">int</span>(total_swings),</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Swing Rate (%)"</span>:</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>            data[<span class="st">"swing"</span>].mean() <span class="op">*</span> <span class="dv">100</span>,</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">"In-Zone Swing Rate (%)"</span>:</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>            in_zone[<span class="st">"swing"</span>].mean() <span class="op">*</span> <span class="dv">100</span>,</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Chase Rate (%)"</span>:</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>            out_zone[<span class="st">"swing"</span>].mean() <span class="op">*</span> <span class="dv">100</span>,</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Swings Inside Zone (%)"</span>:</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>            in_zone[<span class="st">"swing"</span>].<span class="bu">sum</span>() <span class="op">/</span> total_swings <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>swing_comparison <span class="op">=</span> (</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>    pd.DataFrame(results)</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    .set_index(<span class="st">"Period"</span>)</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>swing_comparison.<span class="bu">round</span>(<span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This produced an even more revealing comparison.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Metric</th>
+<th style="text-align: right;">Before</th>
+<th style="text-align: right;">After</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">In-Zone Swing Rate</td>
+<td style="text-align: right;">69.1%</td>
+<td style="text-align: right;">68.4%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Swings Inside Zone</td>
+<td style="text-align: right;">59.5%</td>
+<td style="text-align: right;">64.7%</td>
+</tr>
+</tbody>
+</table>
+<p>PCA’s in-zone swing rate barely changed.</p>
+<p>He was still attacking roughly the same proportion of strikes. The difference was that he was becoming much less willing to chase pitches outside the zone.</p>
+<p>In other words, he wasn’t becoming a passive hitter. He was becoming a more selective aggressive hitter.</p>
+</section>
+<section id="visualizing-his-swing-decisions" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-his-swing-decisions">Visualizing His Swing Decisions</h3>
+<p>Percentages are useful, but they don’t necessarily tell the entire story. I also wanted to see where PCA was actually swinging.</p>
+<p>Using Statcast’s <code>plate_x</code> and <code>plate_z</code> variables, I plotted the horizontal and vertical locations of every pitch he saw. I separated pitches he swung at from pitches he took, then created two plots to compare the periods.</p>
+<div id="c60677a4" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.patches <span class="im">import</span> Rectangle</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">13</span>, <span class="dv">6</span>))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>periods <span class="op">=</span> [</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Before turnaround"</span>, before),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"After turnaround"</span>, after)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, (title, data) <span class="kw">in</span> <span class="bu">zip</span>(axes, periods):</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    taken <span class="op">=</span> data[data[<span class="st">"swing"</span>] <span class="op">==</span> <span class="va">False</span>]</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    ax.scatter(</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        taken[<span class="st">"plate_x"</span>],</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        taken[<span class="st">"plate_z"</span>],</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">"#F28E2B"</span>,</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        alpha<span class="op">=</span><span class="fl">0.3</span>,</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        s<span class="op">=</span><span class="dv">12</span>,</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span><span class="st">"Take"</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    swung <span class="op">=</span> data[data[<span class="st">"swing"</span>] <span class="op">==</span> <span class="va">True</span>]</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    ax.scatter(</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>        swung[<span class="st">"plate_x"</span>],</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>        swung[<span class="st">"plate_z"</span>],</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">"#0E3386"</span>,</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>        alpha<span class="op">=</span><span class="fl">0.4</span>,</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>        s<span class="op">=</span><span class="dv">12</span>,</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span><span class="st">"Swing"</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    zone <span class="op">=</span> Rectangle(</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>        (<span class="op">-</span><span class="fl">0.83</span>, <span class="fl">1.5</span>),</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>        <span class="fl">1.66</span>,</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>        <span class="dv">2</span>,</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>        fill<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>        edgecolor<span class="op">=</span><span class="st">"black"</span>,</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>        linewidth<span class="op">=</span><span class="dv">2</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>    ax.add_patch(zone)</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>    ax.set_ylim(<span class="dv">0</span>, <span class="dv">5</span>)</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>    ax.set_title(title)</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"Horizontal Location (ft)"</span>)</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">"Vertical Location (ft)"</span>)</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>    ax.legend(frameon<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>fig.suptitle(</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Where Did PCA Choose to Swing?"</span>,</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="dv">16</span>,</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>    fontweight<span class="op">=</span><span class="st">"bold"</span></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>[INSERT GRAPH 2: PCA Pitch-Location Scatterplots]</strong></p>
+<p><em>Figure 2. Pitch locations where Crow-Armstrong swung and took pitches before and after May 29.</em></p>
+<p>The visualization provides a more direct look at the change in his approach.</p>
+<p>Rather than just seeing a lower chase rate, we can examine the distribution of pitches he chose to attack.</p>
+<p>The distinction is important because PCA wasn’t necessarily trying to swing at fewer pitches. He was trying to swing at better pitches.</p>
+</section>
+</section>
+<section id="the-mechanical-shift-turning-better-decisions-into-better-contact" class="level2">
+<h2 class="anchored" data-anchor-id="the-mechanical-shift-turning-better-decisions-into-better-contact">3. The Mechanical Shift: Turning Better Decisions Into Better Contact</h2>
+<p>While PCA was changing his approach at the plate, he was also making substantial mechanical adjustments.</p>
+<p>As reported by <em>The Wall Street Journal</em> in September, the overhaul included several changes to his starting position:</p>
+<ul>
+<li><strong>Narrower stance:</strong> Reduced the distance between his feet from approximately 31.5 inches to 18–19 inches.</li>
+<li><strong>Box positioning:</strong> Moved closer to the plate and deeper into the batter’s box, adopting a more upright stance.</li>
+<li><strong>Hand position:</strong> Lowered his hands from shoulder level to below his chest, near his belt.</li>
+<li><strong>Bat angle:</strong> Raised the bat to a more upright position, creating a shorter, more direct path to the ball.</li>
+<li><strong>Stride and leg kick:</strong> Reintroduced a more deliberate stride and leg kick, which became more pronounced into June.</li>
+</ul>
+<p><strong>[INSERT GRAPH 3: Before and After Batting Stance Images]</strong></p>
+<p><em>Figure 3. Crow-Armstrong’s mechanical adjustments throughout the season.</em></p>
+<p>The adjustments were intended to give him a more controlled starting position and help him consistently get into positions where he could drive the baseball.</p>
+<p>But did the changes actually translate into better contact?</p>
+<p>I wanted to investigate this using two metrics: exit velocity and barrel rate.</p>
+<section id="measuring-contact-quality" class="level3">
+<h3 class="anchored" data-anchor-id="measuring-contact-quality">Measuring Contact Quality</h3>
+<p>Exit velocity measures how hard a baseball is hit. Barrel rate measures how frequently a hitter produces contact with an especially productive combination of exit velocity and launch angle.</p>
+<p>Together, they provide a useful way to examine whether PCA was simply making more contact or actually hitting the ball more effectively.</p>
+<p>I started by comparing his batted-ball data before and after May 29.</p>
+<div id="a097a28a" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>before_ev <span class="op">=</span> before[<span class="st">"launch_speed"</span>].dropna()</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>after_ev <span class="op">=</span> after[<span class="st">"launch_speed"</span>].dropna()</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Before:"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">round</span>(before_ev.mean(), <span class="dv">2</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"After:"</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">round</span>(after_ev.mean(), <span class="dv">2</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, data <span class="kw">in</span> [</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Before"</span>, before),</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"After"</span>, after)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>]:</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    batted_balls <span class="op">=</span> data[</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>        data[<span class="st">"launch_speed"</span>].notna()</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    barrel_rate <span class="op">=</span> (</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>        batted_balls[<span class="st">"launch_speed_angle"</span>] <span class="op">==</span> <span class="dv">6</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    ).mean()</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>        name,</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Barrel Rate:"</span>,</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>        <span class="bu">round</span>(barrel_rate, <span class="dv">3</span>)</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The results:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Metric</th>
+<th style="text-align: right;">Before</th>
+<th style="text-align: right;">After</th>
+<th style="text-align: right;">Change</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Average Exit Velocity</td>
+<td style="text-align: right;">83.48 mph</td>
+<td style="text-align: right;">84.07 mph</td>
+<td style="text-align: right;">+0.59 mph</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Barrel Rate</td>
+<td style="text-align: right;">4.2%</td>
+<td style="text-align: right;">6.8%</td>
+<td style="text-align: right;">+2.6 pp</td>
+</tr>
+</tbody>
+</table>
+<p>The increase in average exit velocity was relatively modest, but the improvement in barrel rate was more substantial.</p>
+<p>This suggests that PCA wasn’t necessarily hitting the ball dramatically harder. Instead, he was producing a greater proportion of high-quality contact.</p>
+<p>To visualize the distribution of his exit velocities, I created a violin plot comparing the two periods.</p>
+<div id="2d3dbf51" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="fl">5.5</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>parts <span class="op">=</span> ax.violinplot(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    [before_ev, after_ev],</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    positions<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>],</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    widths<span class="op">=</span><span class="fl">0.7</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    showmeans<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    showmedians<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    showextrema<span class="op">=</span><span class="va">False</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">"#4C78A8"</span>, <span class="st">"#F28E2B"</span>]</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> body, color <span class="kw">in</span> <span class="bu">zip</span>(parts[<span class="st">"bodies"</span>], colors):</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    body.set_facecolor(color)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    body.set_edgecolor(color)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    body.set_alpha(<span class="fl">0.65</span>)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>parts[<span class="st">"cmeans"</span>].set_color(<span class="st">"black"</span>)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>parts[<span class="st">"cmeans"</span>].set_linewidth(<span class="dv">2</span>)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>parts[<span class="st">"cmedians"</span>].set_color(<span class="st">"white"</span>)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>parts[<span class="st">"cmedians"</span>].set_linewidth(<span class="dv">2</span>)</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x, data <span class="kw">in</span> <span class="bu">zip</span>([<span class="dv">1</span>, <span class="dv">2</span>], [before_ev, after_ev]):</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    avg <span class="op">=</span> data.mean()</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    ax.text(</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>        x,</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>        avg <span class="op">+</span> <span class="dv">3</span>,</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"Average: </span><span class="sc">{</span>avg<span class="sc">:.1f}</span><span class="ss"> mph"</span>,</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>        ha<span class="op">=</span><span class="st">"center"</span>,</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>        fontsize<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>        fontweight<span class="op">=</span><span class="st">"bold"</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>ax.set_xticks([<span class="dv">1</span>, <span class="dv">2</span>])</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>ax.set_xticklabels([</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Before</span><span class="ch">\n</span><span class="ss">(n=</span><span class="sc">{</span><span class="bu">len</span>(before_ev)<span class="sc">}</span><span class="ss">)"</span>,</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"After</span><span class="ch">\n</span><span class="ss">(n=</span><span class="sc">{</span><span class="bu">len</span>(after_ev)<span class="sc">}</span><span class="ss">)"</span></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>ax.set_title(</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Pete Crow-Armstrong's Exit Velocity"</span>,</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="dv">16</span>,</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>    fontweight<span class="op">=</span><span class="st">"bold"</span>,</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>    pad<span class="op">=</span><span class="dv">18</span></span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Exit Velocity (mph)"</span>)</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>ax.grid(axis<span class="op">=</span><span class="st">"y"</span>, alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>ax.spines[<span class="st">"top"</span>].set_visible(<span class="va">False</span>)</span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>ax.spines[<span class="st">"right"</span>].set_visible(<span class="va">False</span>)</span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>[INSERT GRAPH 4: Exit Velocity Violin Plot]</strong></p>
+<p><em>Figure 4. Distribution of Crow-Armstrong’s exit velocities before and after the turnaround. Black lines indicate means; white lines indicate medians.</em></p>
+<p>The distribution is just as important as the average.</p>
+<p>A small increase in average exit velocity doesn’t necessarily mean a hitter has fundamentally changed his contact quality. However, when combined with a higher barrel rate, it provides stronger evidence that PCA was producing more productive contact.</p>
+</section>
+</section>
+<section id="tracking-the-transformation-month-by-month" class="level2">
+<h2 class="anchored" data-anchor-id="tracking-the-transformation-month-by-month">4. Tracking the Transformation Month by Month</h2>
+<p>The before-and-after comparison provides a useful snapshot, but it doesn’t capture the entire progression.</p>
+<p>I also wanted to understand how PCA’s performance evolved throughout the season.</p>
+<p>For this, I calculated monthly wOBA, xwOBA, chase rate, whiff rate, average exit velocity, and barrel rate.</p>
+<section id="building-the-monthly-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="building-the-monthly-metrics">Building the Monthly Metrics</h3>
+<p>Using the <code>swing</code> and <code>whiff</code> columns created earlier, I wrote a function to summarize the relevant statistics for each month.</p>
+<div id="559c6495" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> summarize(month_data):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    pa <span class="op">=</span> month_data[</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        month_data[<span class="st">"woba_denom"</span>] <span class="op">==</span> <span class="dv">1</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    xwoba <span class="op">=</span> pa[</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"estimated_woba_using_speedangle"</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    ].fillna(pa[<span class="st">"woba_value"</span>])</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    out_of_zone <span class="op">=</span> month_data[</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        month_data[<span class="st">"zone"</span>] <span class="op">&gt;=</span> <span class="dv">11</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    batted <span class="op">=</span> month_data[</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        month_data[<span class="st">"launch_speed"</span>].notna()</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.Series({</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"PA"</span>: <span class="bu">len</span>(pa),</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">"wOBA"</span>: pa[<span class="st">"woba_value"</span>].mean(),</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">"xwOBA"</span>: xwoba.mean(),</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">"chase_rate"</span>: out_of_zone[<span class="st">"swing"</span>].mean(),</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">"whiff_rate"</span>: (</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>            month_data[<span class="st">"whiff"</span>].<span class="bu">sum</span>()</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>            <span class="op">/</span> month_data[<span class="st">"swing"</span>].<span class="bu">sum</span>()</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>        <span class="st">"avg_EV"</span>: batted[<span class="st">"launch_speed"</span>].mean(),</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>        <span class="st">"barrel_rate"</span>: (</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>            batted[<span class="st">"launch_speed_angle"</span>] <span class="op">==</span> <span class="dv">6</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>        ).mean()</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>monthly <span class="op">=</span> (</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>    df.groupby(<span class="st">"month"</span>)</span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">apply</span>(summarize)</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>monthly.index <span class="op">=</span> [</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>    calendar.month_abbr[m]</span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> m <span class="kw">in</span> monthly.index</span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>monthly</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The resulting data shows a particularly interesting progression.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Month</th>
+<th style="text-align: right;">wOBA</th>
+<th style="text-align: right;">xwOBA</th>
+<th style="text-align: right;">Chase Rate</th>
+<th style="text-align: right;">Barrel Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">April</td>
+<td style="text-align: right;">.296</td>
+<td style="text-align: right;">.286</td>
+<td style="text-align: right;">45.8%</td>
+<td style="text-align: right;">3.5%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">May</td>
+<td style="text-align: right;">.342</td>
+<td style="text-align: right;">.404</td>
+<td style="text-align: right;">30.7%</td>
+<td style="text-align: right;">6.2%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">June</td>
+<td style="text-align: right;">.513</td>
+<td style="text-align: right;">.399</td>
+<td style="text-align: right;">33.4%</td>
+<td style="text-align: right;">6.2%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">July</td>
+<td style="text-align: right;">.427</td>
+<td style="text-align: right;">.361</td>
+<td style="text-align: right;">27.2%</td>
+<td style="text-align: right;">6.4%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">August</td>
+<td style="text-align: right;">.440</td>
+<td style="text-align: right;">.396</td>
+<td style="text-align: right;">33.2%</td>
+<td style="text-align: right;">7.7%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">September</td>
+<td style="text-align: right;">.380</td>
+<td style="text-align: right;">.400</td>
+<td style="text-align: right;">35.1%</td>
+<td style="text-align: right;">5.9%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>[INSERT GRAPH 5: Monthly wOBA, xwOBA, Chase Rate, and Barrel Rate]</strong></p>
+<p><em>Figure 5. Monthly progression of Crow-Armstrong’s offensive production and underlying metrics.</em></p>
+<p>April was clearly the low point. PCA posted a .296 wOBA and chased 45.8% of pitches outside the strike zone.</p>
+<p>By May, his chase rate had fallen to 30.7%, while his xwOBA jumped to .404.</p>
+<p>June was the offensive explosion. His actual wOBA reached .513, although his xwOBA remained lower at .399. This distinction is important because it shows that actual production and underlying contact quality don’t always move together.</p>
+<p>July brought his lowest monthly chase rate of the season at 27.2%.</p>
+<p>August was particularly interesting from a contact-quality perspective. His barrel rate reached 7.7%, the highest monthly figure in the dataset.</p>
+<p>By September, his actual production had cooled, but his .400 xwOBA remained strong.</p>
+<p>The overall progression suggests that PCA’s transformation was more than a brief hot streak. His approach improved substantially, and his quality of contact remained elevated throughout the summer.</p>
+</section>
+</section>
+<section id="putting-it-all-together" class="level2">
+<h2 class="anchored" data-anchor-id="putting-it-all-together">5. Putting It All Together</h2>
+<p>PCA’s 2026 season wasn’t simply a story of a talented player getting hot.</p>
+<p>It was a story of two complementary adjustments.</p>
+<p>First, he changed how he approached hitting. His chase rate declined by 7.3 percentage points after May 29, while his in-zone swing rate remained virtually unchanged. He wasn’t sacrificing aggression; he was becoming more selective about where he directed it.</p>
+<p>Second, he changed how he prepared to swing. His narrower stance, adjusted hand position, and more deliberate stride gave him a different starting point from which to attack pitches.</p>
+<p>The data reflects both changes.</p>
+<p>His barrel rate increased from 4.2% before the turnaround to 6.8% afterward. His average exit velocity also increased, albeit modestly, from 83.48 to 84.07 mph.</p>
+<p>Neither adjustment alone fully explains his offensive explosion. But together, they provide a compelling picture of how PCA developed into a more complete hitter.</p>
+<p>By the end of September, Crow-Armstrong had accumulated 45 home runs, 41 stolen bases, and 10.6 fWAR.</p>
+<p>He had become the seventh player in MLB history to join the 40/40 club, and the National League’s Most Valuable Player.</p>
+<p>Perhaps the most impressive part of his season wasn’t the raw power or the stolen bases. It was the willingness to fundamentally rethink how he approached the game.</p>
+<p>He didn’t stop being aggressive. He learned when to be aggressive.</p>
+<p>And sometimes, that’s the difference between a good hitter and an MVP.</p>
+<hr>
+</section>
+<section id="sources-methodology" class="level2">
+<h2 class="anchored" data-anchor-id="sources-methodology">Sources &amp; Methodology</h2>
+<section id="data-sources" class="level3">
+<h3 class="anchored" data-anchor-id="data-sources">Data Sources</h3>
+<ul>
+<li><a href="https://baseballsavant.mlb.com/">Baseball Savant</a> — Statcast pitch-level data.</li>
+<li><a href="https://www.mlb.com/news/why-pete-crow-armstrong-s-red-hot-may-is-sign-of-more">MLB.com — Why Pete Crow-Armstrong’s red-hot May is sign of more</a> — May performance and approach changes.</li>
+<li><a href="https://www.wsj.com/sports/baseball/pete-crow-armstrong-batting-stance-mvp-cubs-dad7d6d5">The Wall Street Journal — The Risky Mechanical Overhaul That Built a Baseball MVP</a> — Mechanical adjustments.</li>
+<li><a href="https://baseballsavant.mlb.com/savant-player/pete-crow-armstrong-691718">Baseball Savant — Pete Crow-Armstrong</a> — Player Statcast profile.</li>
+</ul>
+</section>
+<section id="methodology" class="level3">
+<h3 class="anchored" data-anchor-id="methodology">Methodology</h3>
+<ul>
+<li><strong>Player:</strong> Pete Crow-Armstrong</li>
+<li><strong>MLBAM ID:</strong> 691718</li>
+<li><strong>Season:</strong> 2026 regular season</li>
+<li><strong>Sample:</strong> 2,922 pitches</li>
+<li><strong>Date range:</strong> March 26 – September 27, 2026</li>
+<li><strong>Data retrieval:</strong> <code>pybaseball</code></li>
+<li><strong>Analysis:</strong> Python, pandas, NumPy, and Matplotlib</li>
+</ul>
+<p>The before-and-after comparison uses May 29, 2026, as its dividing point. The monthly statistics are calculated from the same pitch-level dataset.</p>
+<p>The comparisons are descriptive rather than causal. The timing of the statistical changes overlaps with the reported mechanical and approach adjustments, but the analysis cannot independently establish that either adjustment caused the improvement.</p>
+</section>
+<section id="a-note-on-the-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="a-note-on-the-metrics">A Note on the Metrics</h3>
+<ul>
+<li><strong>Chase Rate:</strong> Percentage of pitches outside the strike zone at which the hitter swings.</li>
+<li><strong>In-Zone Swing Rate:</strong> Percentage of pitches inside the strike zone at which the hitter swings.</li>
+<li><strong>Whiff Rate:</strong> Percentage of swings that result in a swing and miss.</li>
+<li><strong>wOBA:</strong> Weighted On-Base Average, measuring offensive production by assigning different values to different outcomes.</li>
+<li><strong>xwOBA:</strong> Expected Weighted On-Base Average, estimating offensive production based primarily on quality of contact.</li>
+<li><strong>Exit Velocity:</strong> Speed of the baseball immediately after contact.</li>
+<li><strong>Barrel Rate:</strong> Percentage of batted balls classified as barrels by Statcast.</li>
+</ul>
+<hr>
+<p><em>Joey Ran the Stats explores baseball through data, statistics, and quantitative analysis. The code and analysis accompanying this article are available on <a href="https://github.com/JoeyZeee">GitHub</a>.</em></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/joeyzeee\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 Joey</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
