@@ -3,6 +3,7 @@ project:
 
 website:
   title: "Joey Ran the Stats"
+  google-analytics: "G-60X7VHE19Q"
   site-url: https://joeyzeee.github.io
   favicon: favicon.png
   navbar:
@@ -16,6 +17,8 @@ website:
   page-footer: "© 2026 Joey"
   open-graph: true
   twitter-card: true
+
+  
 
 format:
   html:
