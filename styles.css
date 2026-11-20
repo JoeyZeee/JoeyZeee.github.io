@@ -1,4 +1,23 @@
 /* css styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+h1, h2, h3, .title, .listing-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.listing-title { color: #0e3386; }
+
+.listing-category {
+  /*background: #0e3386;*/
+  color: #ffffff;
+  border: none;
+}
+
+.quarto-post { transition: transform 0.15s ease; }
+.quarto-post:hover { transform: translateX(4px); }
+
 .quarto-title-banner {
   background-position: center 25% !important;
 }
@@ -71,4 +90,5 @@ body:has(.quarto-listing) #quarto-header .navbar-nav.me-auto {
 .back-link:hover {
   text-decoration: underline;
 }
+
 
