@@ -11,7 +11,28 @@
     "href": "posts/welcome/index.html",
     "title": "Welcome!",
     "section": "",
-    "text": "← Back to all posts\n\n\n\n\n\nThis is a blog about the beautiful game of baseball and the numbers behind it. I’m Joey, a freshman at Northwestern studying math, and I’m starting this to get some more practice working with real baseball data and to write about anything interesting I find.\nThe code for everything I write will be on GitHub, so you can check my work.\nMore to come soon, so stay tuned."
+    "text": "← Back to all posts"
+  },
+  {
+    "objectID": "posts/welcome/index.html#about-the-blog",
+    "href": "posts/welcome/index.html#about-the-blog",
+    "title": "Welcome!",
+    "section": "About the Blog",
+    "text": "About the Blog\nJoey Ran the Stats is a blog about the beautiful game of baseball and the numbers behind it.\nI’m Joey, a freshman at Northwestern studying math, and I’m starting this to get more practice working with real baseball data and to write about anything interesting I find.\nI hope to publish at least once a month. As a full-time college student, the schedule might not always be consistent, but I’ll share new work whenever I can."
+  },
+  {
+    "objectID": "posts/welcome/index.html#what-to-expect",
+    "href": "posts/welcome/index.html#what-to-expect",
+    "title": "Welcome!",
+    "section": "What to Expect",
+    "text": "What to Expect\nYou can expect to find a mix of:\n\nBaseball analytics and player evaluation\nNew statistical models and data visualizations\nIntriguing findings from real baseball data\nSelect projects from the Northwestern Student R&D Team"
+  },
+  {
+    "objectID": "posts/welcome/index.html#follow-along",
+    "href": "posts/welcome/index.html#follow-along",
+    "title": "Welcome!",
+    "section": "Follow Along",
+    "text": "Follow Along\nThe code for everything I write will be available on GitHub, so you can explore the models and reproduce my results yourself.\nMore to come soon. Stay tuned!"
   },
   {
     "objectID": "index.html",

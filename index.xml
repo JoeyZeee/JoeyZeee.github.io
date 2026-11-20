@@ -21,11 +21,29 @@
 
 
 
-<p>This is a blog about the beautiful game of baseball and the numbers behind it. I’m Joey, a freshman at Northwestern studying math, and I’m starting this to get some more practice working with real baseball data and to write about anything interesting I find.</p>
-<p>The code for everything I write will be on <a href="https://github.com/JoeyZeee">GitHub</a>, so you can check my work.</p>
-<p>More to come soon, so stay tuned.</p>
+<section id="about-the-blog" class="level2">
+<h2 class="anchored" data-anchor-id="about-the-blog">About the Blog</h2>
+<p>Joey Ran the Stats is a blog about the beautiful game of baseball and the numbers behind it.</p>
+<p>I’m Joey, a freshman at Northwestern studying math, and I’m starting this to get more practice working with real baseball data and to write about anything interesting I find.</p>
+<p>I hope to publish at least once a month. As a full-time college student, the schedule might not always be consistent, but I’ll share new work whenever I can.</p>
+</section>
+<section id="what-to-expect" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-expect">What to Expect</h2>
+<p>You can expect to find a mix of:</p>
+<ul>
+<li>Baseball analytics and player evaluation</li>
+<li>New statistical models and data visualizations</li>
+<li>Intriguing findings from real baseball data</li>
+<li>Select projects from the Northwestern Student R&amp;D Team</li>
+</ul>
+</section>
+<section id="follow-along" class="level2">
+<h2 class="anchored" data-anchor-id="follow-along">Follow Along</h2>
+<p>The code for everything I write will be available on <a href="https://github.com/JoeyZeee">GitHub</a>, so you can explore the models and reproduce my results yourself.</p>
+<p>More to come soon. Stay tuned!</p>
 
 
+</section>
 
  ]]></description>
   <category>Intro</category>

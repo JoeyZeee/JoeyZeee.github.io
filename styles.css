@@ -5,7 +5,7 @@
 
 .quarto-title-banner .title,
 .quarto-title-banner .subtitle {
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+  text-shadow: none !important;
 }
 
 /* Navbar floats over the banner (only on pages that have one) */
@@ -71,3 +71,4 @@ body:has(.quarto-listing) #quarto-header .navbar-nav.me-auto {
 .back-link:hover {
   text-decoration: underline;
 }
+
