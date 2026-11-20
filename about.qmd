@@ -12,6 +12,8 @@ about:
       href: https://github.com/JoeyZeee
 ---
 
-Hi, I'm Joey. I'm a freshman at Northwestern studying Applied Math and Mathematical Methods in the Social Sciences (MMSS).
+Hi, I'm Joey! I'm a freshman at Northwestern studying Applied Math and Mathematical Methods in the Social Sciences (MMSS).
 
-All my code is on [GitHub](https://github.com/JoeyZeee), so you can check my work.
+I'm on the Student R&D Team for Northwestern Baseball, and I'm a lifelong Cubs fan. I’m just getting formally started in baseball analytics, and this blog is how I plan to practice in public.
+
+All my code is on [GitHub](https://github.com/JoeyZeee), so you can check my work :)

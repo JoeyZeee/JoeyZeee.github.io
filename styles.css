@@ -1,1 +1,9 @@
 /* css styles */
+.quarto-title-banner {
+  background-position: center 25% !important;
+}
+
+.quarto-title-banner .title,
+.quarto-title-banner .subtitle {
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+}
