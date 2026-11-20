@@ -4,6 +4,7 @@ project:
 website:
   title: "Joey Ran the Stats"
   site-url: https://joeyzeee.github.io
+  favicon: favicon.png
   navbar:
     left:
       - text: "Home"
