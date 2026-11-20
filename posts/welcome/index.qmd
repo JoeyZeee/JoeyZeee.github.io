@@ -4,8 +4,25 @@ date: 2026-11-19
 categories: [Intro]
 ---
 
-This is a blog about the beautiful game of baseball and the numbers behind it. I'm Joey, a freshman at Northwestern studying math, and I'm starting this to get some more practice working with real baseball data and to write about anything interesting I find.
+## About the Blog
 
-The code for everything I write will be on [GitHub](https://github.com/JoeyZeee), so you can check my work.
+Joey Ran the Stats is a blog about the beautiful game of baseball and the numbers behind it.
 
-More to come soon, so stay tuned.
+I'm Joey, a freshman at Northwestern studying math, and I'm starting this to get more practice working with real baseball data and to write about anything interesting I find. 
+
+I hope to publish at least once a month. As a full-time college student, the schedule might not always be consistent, but I'll share new work whenever I can.
+
+## What to Expect
+
+You can expect to find a mix of:
+
+- Baseball analytics and player evaluation
+- New statistical models and data visualizations
+- Intriguing findings from real baseball data
+- Select projects from the Northwestern Student R&D Team
+
+## Follow Along
+
+The code for everything I write will be available on [GitHub](https://github.com/JoeyZeee), so you can explore the models and reproduce my results yourself.
+
+More to come soon. Stay tuned!
