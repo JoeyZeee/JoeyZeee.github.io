@@ -1,14 +1,22 @@
+project:
+  type: website
+
 website:
   title: "Joey Ran the Stats"
   site-url: https://joeyzeee.github.io
   navbar:
-    title: false
+    left:
+      - text: "Home"
+        href: index.qmd
     right:
       - about.qmd
       - icon: github
         href: https://github.com/JoeyZeee
-      - icon: rss
-        href: index.xml
   page-footer: "© 2026 Joey"
   open-graph: true
   twitter-card: true
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css

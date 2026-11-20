@@ -7,3 +7,67 @@
 .quarto-title-banner .subtitle {
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
 }
+
+/* Navbar floats over the banner (only on pages that have one) */
+body:has(.quarto-listing) {
+  padding-top: 0 !important;
+}
+
+body:has(.quarto-listing) #quarto-header {
+  position: absolute !important;
+  top: 0;
+  width: 100%;
+  background: transparent !important;
+  transform: none !important;
+}
+
+body:has(.quarto-listing) #quarto-header .navbar {
+  background-color: transparent !important;
+  border-bottom: none;
+}
+
+body:has(.quarto-listing) #quarto-header .navbar .nav-link,
+body:has(.quarto-listing) #quarto-header .navbar .bi,
+body:has(.quarto-listing) #quarto-header .navbar .aa-DetachedSearchButton,
+body:has(.quarto-listing) #quarto-header .navbar .aa-DetachedSearchButtonIcon {
+  color: #ffffff !important;
+}
+
+body:has(.quarto-listing) #quarto-header .navbar .nav-link:hover {
+  color: #cfd8e8 !important;
+}
+
+body:has(.quarto-listing) #quarto-header #quarto-search,
+body:has(.quarto-listing) #quarto-header #quarto-search * {
+  color: #ffffff !important;
+  background: transparent !important;
+}
+
+body:has(.quarto-listing) #quarto-header #quarto-search svg {
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6));
+}
+
+body:has(.quarto-listing) .navbar-brand {
+  display: none;
+}
+
+/* Never show the site name in the navbar; the banner and Home link cover it */
+.navbar-brand {
+  display: none !important;
+}
+
+/* No Home link on the homepage (the page with the banner) */
+body:has(.quarto-listing) #quarto-header .navbar-nav.me-auto {
+  display: none !important;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
