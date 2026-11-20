@@ -1,7 +1,7 @@
 ---
 title: "Welcome!"
 date: 2026-11-19
-categories: [intro]
+categories: [Intro]
 ---
 
 This is a blog about the beautiful game of baseball and the numbers behind it. I'm Joey, a freshman at Northwestern studying math, and I'm starting this to get some more practice working with real baseball data and to write about anything interesting I find.
