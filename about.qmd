@@ -1,0 +1,17 @@
+---
+title: "About"
+image: profile.jpg
+about:
+  template: jolla
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/joey-zambreno
+    - icon: github
+      text: GitHub
+      href: https://github.com/JoeyZeee
+---
+
+Hi, I'm Joey. I'm a freshman at Northwestern studying Applied Math and Mathematical Methods in the Social Sciences (MMSS).
+
+All my code is on [GitHub](https://github.com/JoeyZeee), so you can check my work.

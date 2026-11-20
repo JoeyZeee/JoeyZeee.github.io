@@ -1,0 +1,11 @@
+---
+title: "Welcome!"
+date: 2026-11-19
+categories: [intro]
+---
+
+This is a blog about the beautiful game of baseball and the numbers behind it. I'm Joey, a freshman at Northwestern studying math, and I'm starting this to get some more practice working with real baseball data and to write about anything interesting I find.
+
+Posts will mostly be short: a question, a chart, and what I think it shows. The code will be on [GitHub](https://github.com/JoeyZeee) so you can check my work.
+
+More to come soon, so stay tuned.
