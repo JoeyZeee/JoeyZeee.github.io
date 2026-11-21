@@ -717,6 +717,31 @@ gtag('config', 'G-60X7VHE19Q', { 'anonymize_ip': true});
     </div>
   </div>
 </footer>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const progress = document.createElement("div");
+  progress.id = "reading-progress";
+  document.body.appendChild(progress);
+
+  function updateProgress() {
+    const scrollable =
+      document.documentElement.scrollHeight - window.innerHeight;
+
+    const percentage = scrollable > 0
+      ? window.scrollY / scrollable
+      : 0;
+
+    progress.style.width = `${percentage * 100}%`;
+  }
+
+  window.addEventListener("scroll", updateProgress, {
+    passive: true
+  });
+
+  window.addEventListener("resize", updateProgress);
+  updateProgress();
+});
+</script>
 
 
 
