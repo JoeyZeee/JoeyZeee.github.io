@@ -1,6 +1,6 @@
 ---
 title: "Inside Pete Crow-Armstrong's MVP Transformation"
-date: 2026-11-20
+date: 2026-11-27
 categories: [Player Analysis, Cubs, Baseball Analytics]
 draft: true
 ---
