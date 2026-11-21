@@ -1,7 +1,6 @@
 ---
 title: "Scheduled Publishing Test"
 date: 2026-11-20
-draft: true
 ---
 
 If you can read this, scheduled publishing worked!
