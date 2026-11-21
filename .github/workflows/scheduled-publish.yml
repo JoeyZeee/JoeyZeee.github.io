@@ -4,7 +4,7 @@ name: Scheduled Quarto Publish
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 19 20 11 *"
+    - cron: "0 8 27 11 *"
       timezone: "America/Chicago"
 
 permissions:
@@ -18,24 +18,37 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Remove draft status from scheduled article
+      - name: Check publication date
+        id: datecheck
         run: |
-          sed -i '/^draft: true$/d' posts/scheduled-test/index.qmd
+          if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]] || \
+             [[ "$(TZ=America/Chicago date +%F)" == "2026-11-27" ]]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Remove draft status from PCA article
+        if: steps.datecheck.outputs.run == 'true'
+        run: |
+          sed -i '/^draft: true$/d' posts/Inside-Pete-Crow-Armstrongs-MVP-Transformation/index.qmd
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add posts/scheduled-test/index.qmd
+          git add posts/Inside-Pete-Crow-Armstrongs-MVP-Transformation/index.qmd
 
           if ! git diff --cached --quiet; then
-            git commit -m "Publish scheduled test article"
+            git commit -m "Publish PCA MVP article"
             git push
           fi
 
       - name: Set up Quarto
+        if: steps.datecheck.outputs.run == 'true'
         uses: quarto-dev/quarto-actions/setup@v2
 
       - name: Publish website
+        if: steps.datecheck.outputs.run == 'true'
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages
