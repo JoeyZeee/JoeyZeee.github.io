@@ -1,10 +1,10 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Joey Ran the Stats",
     "section": "",
-    "text": "Hi, I’m Joey! I’m a freshman at Northwestern studying Applied Math and Mathematical Methods in the Social Sciences (MMSS).\nI’m on the Student R&D Team for Northwestern Baseball, and I’m a lifelong Cubs fan. I’m just getting formally started in baseball analytics, and this blog is how I plan to practice in public.\nAll my code is on GitHub, so you can check my work :)"
+    "text": "Scheduled Publishing Test\n\n\n\n\n\n\n\n\n\n\nNov 20, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome!\n\n\n\nIntro\n\n\n\n\n\n\n\n\n\n\n\nNov 19, 2026\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/welcome/index.html",
@@ -35,10 +35,17 @@
     "text": "Follow Along\nThe code for everything I write will be available on GitHub, so you can explore the models and reproduce my results yourself.\nMore to come soon. Stay tuned!"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Joey Ran the Stats",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "Welcome!\n\n\n\nIntro\n\n\n\n\n\n\n\n\n\n\n\nNov 19, 2026\n\n\n\n\n\nNo matching items"
+    "text": "Hi, I’m Joey! I’m a freshman at Northwestern studying Applied Math and Mathematical Methods in the Social Sciences (MMSS).\nI’m on the Student R&D Team for Northwestern Baseball, and I’m a lifelong Cubs fan. I’m just getting formally started in baseball analytics, and this blog is how I plan to practice in public.\nAll my code is on GitHub, so you can check my work :)"
+  },
+  {
+    "objectID": "posts/scheduled-test/index.html",
+    "href": "posts/scheduled-test/index.html",
+    "title": "Scheduled Publishing Test",
+    "section": "",
+    "text": "← Back to all posts\n\n\n\n\n\nIf you can read this, scheduled publishing worked!"
   }
 ]

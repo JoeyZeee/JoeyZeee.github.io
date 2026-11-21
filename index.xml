@@ -10,7 +10,25 @@
 <atom:link href="https://joeyzeee.github.io/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.11.9</generator>
-<lastBuildDate>Thu, 19 Nov 2026 06:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 20 Nov 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Scheduled Publishing Test</title>
+  <link>https://joeyzeee.github.io/posts/scheduled-test/</link>
+  <description><![CDATA[ 
+<a class="back-link" href="../../">← Back to all posts</a>
+
+
+
+
+
+<p>If you can read this, scheduled publishing worked!</p>
+
+
+
+ ]]></description>
+  <guid>https://joeyzeee.github.io/posts/scheduled-test/</guid>
+  <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Welcome!</title>
   <link>https://joeyzeee.github.io/posts/welcome/</link>
@@ -48,7 +66,7 @@
  ]]></description>
   <category>Intro</category>
   <guid>https://joeyzeee.github.io/posts/welcome/</guid>
-  <pubDate>Thu, 19 Nov 2026 06:00:00 GMT</pubDate>
+  <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
