@@ -166,7 +166,7 @@ Percentages are useful, but they don't necessarily tell the entire story. I also
 Using Statcast's `plate_x` and `plate_z` variables, I plotted the horizontal and vertical locations of every pitch he saw. I separated pitches he swung at from pitches he took, then created two plots to compare the periods.
 
 ::: {style="margin: 2.5rem 0; text-align: center;"}
-![Pitch locations showing the change in Crow-Armstrong's approach at the plate.](Fig3.png){fig-align="center" width="85%"}
+![Pitch locations showing the change in Crow-Armstrong's approach at the plate.](Fig1.png){fig-align="center" width="85%"}
 
 *Figure 1. Pitch locations where Crow-Armstrong swung and took pitches before and after May 14.*
 :::
