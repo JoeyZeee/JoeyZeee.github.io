@@ -34,7 +34,6 @@ toc: false
   <p class="nf-text">That page doesn't exist, or it moved.</p>
 </div>
 ```
-
 ::: {.nf-links}
 [Back to the homepage](/) · [About](/about.html)
 :::

@@ -1,3 +1,4 @@
+
 # options specified here will apply to all posts in this folder
 
 # freeze computational output
@@ -16,3 +17,30 @@ format:
     include-before-body:
       text: |
         <a class="back-link" href="/">← Back to all posts</a>
+    include-after-body:
+      text: |
+        <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const progress = document.createElement("div");
+          progress.id = "reading-progress";
+          document.body.appendChild(progress);
+
+          function updateProgress() {
+            const scrollable =
+              document.documentElement.scrollHeight - window.innerHeight;
+
+            const percentage = scrollable > 0
+              ? window.scrollY / scrollable
+              : 0;
+
+            progress.style.width = `${percentage * 100}%`;
+          }
+
+          window.addEventListener("scroll", updateProgress, {
+            passive: true
+          });
+
+          window.addEventListener("resize", updateProgress);
+          updateProgress();
+        });
+        </script>

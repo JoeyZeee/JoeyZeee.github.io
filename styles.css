@@ -91,4 +91,15 @@ body:has(.quarto-listing) #quarto-header .navbar-nav.me-auto {
   text-decoration: underline;
 }
 
-
+/* Reading progress bar */
+#reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 0%;
+  background-color: #0e3386;
+  z-index: 9999;
+  pointer-events: none;
+  transition: width 0.08s linear;
+}
