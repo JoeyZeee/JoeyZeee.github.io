@@ -1,0 +1,40 @@
+---
+pagetitle: "Page not found"
+page-layout: custom
+toc: false
+---
+
+```{=html}
+<style>
+  .nf { text-align: center; max-width: 640px; margin: 0 auto; padding: 4rem 1rem 1rem; }
+  .nf-code {
+    display: flex; justify-content: center; align-items: center; gap: 0.4rem;
+    font-size: clamp(5rem, 18vw, 9rem); font-weight: 800; line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .nf-ball { height: 0.85em; width: auto; animation: nf-roll 1.2s ease-out; }
+  @keyframes nf-roll {
+    from { transform: translateX(-70px) rotate(-360deg); opacity: 0; }
+    to   { transform: none; opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) { .nf-ball { animation: none; } }
+  .nf-title { margin: 1.5rem 0 0.5rem; font-size: 1.75rem; font-weight: 700; }
+  .nf-text { color: #6c757d; margin-bottom: 1.5rem; }
+  .nf-links { text-align: center; padding-bottom: 5rem; }
+  .nf-links a { color: inherit; text-decoration: underline; }
+</style>
+
+<div class="nf">
+  <div class="nf-code">
+    <span>4</span>
+    <img class="nf-ball" src="/favicon.png" alt="0">
+    <span>4</span>
+  </div>
+  <h1 class="nf-title">Page not found</h1>
+  <p class="nf-text">That page doesn't exist, or it moved.</p>
+</div>
+```
+
+::: {.nf-links}
+[Back to the homepage](/) · [About](/about.html)
+:::
