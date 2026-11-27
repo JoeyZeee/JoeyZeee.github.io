@@ -303,7 +303,7 @@ June was the offensive explosion. His actual wOBA reached .513, although his xwO
 
 July brought his lowest monthly chase rate of the season at 27.2%.
 
-August was particularly interesting from a contact-quality perspective. His barrel rate reached 7.7%, the highest monthly figure in the dataset.
+August was particularly interesting from a contact-quality perspective. His barrel rate reached 17.6%, the highest monthly figure in the dataset.
 
 By September, his actual production had cooled, but his .400 xwOBA remained strong.
 
@@ -317,7 +317,7 @@ First, he refined his approach at the plate. His chase rate declined by 10.5 per
 
 Second, he reshaped his swing mechanics. His narrower stance, adjusted hand position, and more deliberate stride gave him a new foundation from which to attack pitches.
 
-The results were reflected in his underlying metrics. His barrel rate increased from 3.9% before the turnaround to 6.6% afterward, while his average exit velocity climbed from 83.62 to 83.97 mph. Together, these changes point to more productive contact.
+The results were reflected in his underlying metrics. His barrel rate nearly doubled, from 8.0% before May 14 to 15.2% afterward, while his average exit velocity climbed from 88.9 to 90.1 mph. Together, these changes point to more productive contact.
 
 By the end of September, Crow-Armstrong had accumulated 45 home runs, 41 stolen bases, and 10.6 fWAR. He became the seventh player in MLB history to join the 40/40 club and unanimously won the National League Most Valuable Player award.
 
