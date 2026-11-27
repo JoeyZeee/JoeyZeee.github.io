@@ -1,2 +1,1174 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"></html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-11-27">
+
+<title>Inside Pete Crow-Armstrong’s MVP Transformation – Joey Ran the Stats</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-d31a0c91b01e363be7b7a36e602e2c70.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-60X7VHE19Q"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-60X7VHE19Q', { 'anonymize_ip': true});
+</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Inside Pete Crow-Armstrong’s MVP Transformation – Joey Ran the Stats">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://joeyzeee.github.io/posts/Inside-Pete-Crow-Armstrongs-MVP-Transformation/PeteCrow.jpg">
+<meta property="og:site_name" content="Joey Ran the Stats">
+<meta property="og:image:alt" content="Pete Crow-Armstrong of the Chicago Cubs">
+<meta property="og:image:height" content="432">
+<meta property="og:image:width" content="768">
+<meta name="twitter:title" content="Inside Pete Crow-Armstrong’s MVP Transformation – Joey Ran the Stats">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://joeyzeee.github.io/posts/Inside-Pete-Crow-Armstrongs-MVP-Transformation/PeteCrow.jpg">
+<meta name="twitter:image:alt" content="Pete Crow-Armstrong of the Chicago Cubs">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Joey Ran the Stats</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JoeyZeee"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Inside Pete Crow-Armstrong’s MVP Transformation</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Player Analysis</div>
+                <div class="quarto-category">Baseball Analytics</div>
+                <div class="quarto-category">Chicago Cubs</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">November 27, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content" tabindex="-1">
+<a class="back-link" href="../../">← Back to all posts</a>
+
+
+
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="PeteCrow.jpg" class="img-fluid figure-img" style="width:100.0%" alt="Pete Crow-Armstrong of the Chicago Cubs"></p>
+<figcaption>Pete Crow-Armstrong celebrates during a game against the Colorado Rockies at Wrigley Field on June 16, 2026.</figcaption>
+</figure>
+</div>
+<p><small>CHICAGO, ILLINOIS – JUNE 16: Pete Crow-Armstrong #4 of the Chicago Cubs points toward the field during a matchup against the Colorado Rockies at Wrigley Field on June 16, 2026, in Chicago, Illinois. Photo by Matt Dirksen/Chicago Cubs/Getty Images.</small></p>
+<section id="from-a-slow-start-to-an-mvp-season" class="level2">
+<h2 class="anchored" data-anchor-id="from-a-slow-start-to-an-mvp-season">From a Slow Start to an MVP Season</h2>
+<p>Pete Crow-Armstrong had a season most baseball players can only dream of.</p>
+<p>In 2026, the Chicago Cubs center fielder hit <strong>45 home runs, stole 41 bases, drove in 107 runs, and posted a .280/.372/.570 slash line</strong>. He became just the seventh player in Major League Baseball history to join the coveted 40/40 club, his 10.6 fWAR led all of baseball, and the historic campaign earned him a unanimous National League Most Valuable Player award.</p>
+<p>But just a few months earlier, many Cubs fans were calling for Crow-Armstrong to be benched due to his inconsistency at the plate. His aggressive approach left him vulnerable to pitches outside the strike zone, and his existing swing mechanics weren’t consistently translating his considerable athleticism into productive contact.</p>
+<p>Then, something drastic changed.</p>
+<p>In May, PCA made a series of adjustments that would fundamentally reshape his season. He narrowed his stance, moved closer to the plate, repositioned his hands, and completely altered his mental approach to his at-bats.</p>
+<p>So, how exactly did a hitter who struggled through the opening month of the season become the most valuable player in the National League?</p>
+<p><strong>Well, Joey Ran the Stats.</strong></p>
+<p>Using Python and Statcast pitch-level data, I wanted to investigate two parts of PCA’s transformation. The snippets below highlight the key steps; the complete code, including the visualization work, is available on GitHub.</p>
+<ol type="1">
+<li><strong>The mental shift:</strong> Did he actually become more selective at the plate, and could that change be quantified?</li>
+<li><strong>The mechanical shift:</strong> Did his mechanical adjustments translate into better contact quality?</li>
+</ol>
+<p>Rather than simply comparing his statistics at the beginning and end of the season, I wanted to examine the individual pitches that make up those statistics. By looking at his swing decisions, pitch locations, and batted-ball outcomes, we can get a much better understanding of what actually changed, and how sustainable this production is.</p>
+</section>
+<section id="building-the-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="building-the-dataset">1. Building the Dataset</h2>
+<p>Before analyzing anything, I needed the data.</p>
+<p>I used the <code>pybaseball</code> library to retrieve Statcast data directly from Baseball Savant. Specifically, I pulled every pitch recorded for Crow-Armstrong throughout the 2026 regular season.</p>
+<p>The dataset includes information about each pitch, including its location, velocity, outcome, and the resulting batted-ball measurements.</p>
+<section id="retrieving-statcast-data" class="level3">
+<h3 class="anchored" data-anchor-id="retrieving-statcast-data">Retrieving Statcast Data</h3>
+<p>I started by importing the libraries needed for the analysis and retrieving PCA’s pitch-level data using his MLBAM player ID.</p>
+<div id="62d45b19" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pybaseball <span class="im">import</span> statcast_batter, cache</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>cache.enable()</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>PCA_ID <span class="op">=</span> <span class="dv">691718</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> statcast_batter(<span class="st">"2026-03-20"</span>, <span class="st">"2026-10-05"</span>, PCA_ID)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">"game_type"</span>] <span class="op">==</span> <span class="st">"R"</span>].copy()</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"game_date"</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">"game_date"</span>])</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"month"</span>] <span class="op">=</span> df[<span class="st">"game_date"</span>].dt.month.clip(lower<span class="op">=</span><span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This returned <strong>2,922 pitches</strong>, covering March 26 through September 27.</p>
+<p>I also grouped the late-March games into April so that the monthly comparisons would be easier to interpret.</p>
+<p>With the dataset ready, I could start examining the two major components of PCA’s transformation.</p>
+</section>
+</section>
+<section id="the-mental-shift-becoming-a-more-selective-hitter" class="level2">
+<h2 class="anchored" data-anchor-id="the-mental-shift-becoming-a-more-selective-hitter">2. The Mental Shift: Becoming a More Selective Hitter</h2>
+<p>One of the biggest changes in PCA’s approach was his ability to recognize which pitches deserved his aggression.</p>
+<p>In 2025, his chase rate was 41.7%, meaning he swung at more than four out of every ten pitches outside the strike zone.</p>
+<p>That tendency gave pitchers an easy way to attack him. Rather than challenging him directly, they could expand the strike zone and rely on his willingness to chase.</p>
+<p>In May 2026, however, his approach began to change. MLB reported that his strikeout rate dropped from 29.7% in March and April to 21.3% in May. His whiff rate also fell from 29.9% to 23.7%.</p>
+<p>I wanted to see whether these improvements were reflected in the actual pitches he chose to swing at.</p>
+<section id="defining-swing-decisions" class="level3">
+<h3 class="anchored" data-anchor-id="defining-swing-decisions">Defining Swing Decisions</h3>
+<p>The first step was identifying which pitches resulted in a swing and which resulted in a miss.</p>
+<p>Statcast records pitch outcomes through the <code>description</code> column. I created two lists to classify these outcomes.</p>
+<p>These Boolean columns allowed me to calculate swing and whiff rates directly from the pitch-level data.</p>
+<p>For example, the swing rate is simply the percentage of pitches on which PCA swung. Chase rate is the percentage of pitches outside the strike zone on which he swung.</p>
+</section>
+<section id="finding-the-turning-point" class="level3">
+<h3 class="anchored" data-anchor-id="finding-the-turning-point">Finding the Turning Point</h3>
+<p>I chose May 14 as the dividing point for my before-and-after analysis, because that’s when <em>Bleed Cubbie Blue</em> reported that Crow-Armstrong changed his batting stance.</p>
+<p>This gave me two samples:</p>
+<ul>
+<li>Before: 641 pitches</li>
+<li>After: 2,281 pitches</li>
+</ul>
+<p>I then calculated the swing rate, chase rate, and whiff rate for each period:</p>
+<div id="5eace2ba" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>SWINGS <span class="op">=</span> [</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"swinging_strike"</span>, <span class="st">"swinging_strike_blocked"</span>, <span class="st">"foul"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"foul_tip"</span>, <span class="st">"hit_into_play"</span>, <span class="st">"foul_bunt"</span>, <span class="st">"missed_bunt"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>WHIFFS <span class="op">=</span> [<span class="st">"swinging_strike"</span>, <span class="st">"swinging_strike_blocked"</span>, <span class="st">"missed_bunt"</span>]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"swing"</span>] <span class="op">=</span> df[<span class="st">"description"</span>].isin(SWINGS)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"whiff"</span>] <span class="op">=</span> df[<span class="st">"description"</span>].isin(WHIFFS)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>turnaround <span class="op">=</span> <span class="st">"2026-05-14"</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>before <span class="op">=</span> df[df[<span class="st">"game_date"</span>] <span class="op">&lt;</span> turnaround]</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>after <span class="op">=</span> df[df[<span class="st">"game_date"</span>] <span class="op">&gt;=</span> turnaround]</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> label, sample <span class="kw">in</span> [(<span class="st">"Before"</span>, before), (<span class="st">"After"</span>, after)]:</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    out_of_zone <span class="op">=</span> sample[sample[<span class="st">"zone"</span>] <span class="op">&gt;=</span> <span class="dv">11</span>]</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    swing_rate <span class="op">=</span> sample[<span class="st">"swing"</span>].mean()</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    chase_rate <span class="op">=</span> out_of_zone[<span class="st">"swing"</span>].mean()</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    whiff_rate <span class="op">=</span> sample[<span class="st">"whiff"</span>].<span class="bu">sum</span>() <span class="op">/</span> sample[<span class="st">"swing"</span>].<span class="bu">sum</span>()</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(label, <span class="bu">round</span>(swing_rate, <span class="dv">3</span>), <span class="bu">round</span>(chase_rate, <span class="dv">3</span>), <span class="bu">round</span>(whiff_rate, <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The results were particularly interesting.</p>
+<div style="margin: 2rem 0;">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Metric</th>
+<th style="text-align: right;">Before</th>
+<th style="text-align: right;">After</th>
+<th style="text-align: right;">Change</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Swing Rate</td>
+<td style="text-align: right;">54.8%</td>
+<td style="text-align: right;">48.2%</td>
+<td style="text-align: right;">-6.6 pp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chase Rate</td>
+<td style="text-align: right;">42.4%</td>
+<td style="text-align: right;">31.9%</td>
+<td style="text-align: right;">-10.5 pp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Whiff Rate</td>
+<td style="text-align: right;">25.4%</td>
+<td style="text-align: right;">23.8%</td>
+<td style="text-align: right;">-1.6 pp</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The most important number is his chase rate.</p>
+<p>After May 14, PCA chased pitches outside the strike zone just 31.9% of the time, compared with 42.4% beforehand.</p>
+<p>But his overall swing rate also declined, which raises an important question: Was he simply becoming more passive?</p>
+<p>To answer that, I needed to distinguish between pitches inside and outside the strike zone.</p>
+<p>This produced an even more revealing comparison.</p>
+<div style="margin: 2rem 0;">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Metric</th>
+<th style="text-align: right;">Before</th>
+<th style="text-align: right;">After</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">In-Zone Swing Rate</td>
+<td style="text-align: right;">70.3%</td>
+<td style="text-align: right;">68.1%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Share of Swings in the Zone</td>
+<td style="text-align: right;">58.1%</td>
+<td style="text-align: right;">64.6%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>PCA’s in-zone swing rate dipped only slightly, from 70.3% to 68.1%, while the share of his swings that came on strikes rose from 58.1% to 64.6%.</p>
+<p>So, he was still attacking roughly the same proportion of strikes, the only difference was that he was becoming much less willing to chase pitches outside the zone.</p>
+<p>In other words, his mental shift hadn’t caused him to become a passive hitter, it just made him become a more selective hitter.</p>
+</section>
+<section id="visualizing-his-swing-decisions" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-his-swing-decisions">Visualizing His Swing Decisions</h3>
+<p>Percentages are useful, but they don’t necessarily tell the entire story. I also wanted to see where PCA was actually swinging.</p>
+<p>Using Statcast’s <code>plate_x</code> and <code>plate_z</code> variables, I plotted the horizontal and vertical locations of every pitch he saw. I separated pitches he swung at from pitches he took, then created two plots to compare the periods.</p>
+<div style="margin: 2.5rem 0; text-align: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Fig1.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<figcaption>Pitch locations showing the change in Crow-Armstrong’s approach at the plate.</figcaption>
+</figure>
+</div>
+<p><em>Figure 1. Pitch locations where Crow-Armstrong swung and took pitches before and after May 14.</em></p>
+</div>
+<p>In figure 1, the change is clear. In the left panel, from before May 14, blue swing dots stray well outside the box, especially below the zone and off the edges. In the right panel, the swings pack into the strike zone, and the pitches around it, particularly the ones up and out of the zone, are mostly orange takes.</p>
+</section>
+</section>
+<section id="the-mechanical-shift-turning-better-decisions-into-better-contact" class="level2">
+<h2 class="anchored" data-anchor-id="the-mechanical-shift-turning-better-decisions-into-better-contact">3. The Mechanical Shift: Turning Better Decisions Into Better Contact</h2>
+<p>While PCA was changing his approach at the plate, he was also making substantial mechanical adjustments.</p>
+<p>As reported by <em>The Wall Street Journal</em> in September, the overhaul included several changes to his starting position:</p>
+<ul>
+<li><strong>Narrower stance:</strong> Reduced the distance between his feet from approximately 31.5 inches to 18–19 inches.</li>
+<li><strong>Box positioning:</strong> Moved closer to the plate and deeper into the batter’s box, adopting a more upright stance.</li>
+<li><strong>Hand position:</strong> Lowered his hands from shoulder level to below his chest, near his belt.</li>
+<li><strong>Bat angle:</strong> Raised the bat to a more upright position, creating a shorter, more direct path to the ball.</li>
+<li><strong>Stride and leg kick:</strong> Reintroduced a more deliberate stride and leg kick, which became more pronounced into June.</li>
+</ul>
+<p>The adjustments were intended to give him a more controlled starting position and help him consistently get into positions where he could drive the baseball.</p>
+<p>But did the changes actually translate into better contact?</p>
+<p>I wanted to investigate this using two metrics: exit velocity and barrel rate.</p>
+<section id="measuring-contact-quality" class="level3">
+<h3 class="anchored" data-anchor-id="measuring-contact-quality">Measuring Contact Quality</h3>
+<p>Exit velocity measures how hard a baseball is hit. Barrel rate measures how frequently a hitter produces contact with an especially productive combination of exit velocity and launch angle.</p>
+<p>Together, they provide a useful way to examine whether PCA was simply making more contact or actually hitting the ball more effectively.</p>
+<p>I started by comparing his batted-ball data before and after May 14. Both metrics use balls in play only, which matches how Baseball Savant reports them.</p>
+<div id="b2d9e66c" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> balls_in_play(data):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> data[(data[<span class="st">"type"</span>] <span class="op">==</span> <span class="st">"X"</span>) <span class="op">&amp;</span> data[<span class="st">"launch_speed"</span>].notna()]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> label, sample <span class="kw">in</span> [(<span class="st">"Before"</span>, before), (<span class="st">"After"</span>, after)]:</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    bip <span class="op">=</span> balls_in_play(sample)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    barrels <span class="op">=</span> (bip[<span class="st">"launch_speed_angle"</span>] <span class="op">==</span> <span class="dv">6</span>).<span class="bu">sum</span>()</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(label, <span class="bu">len</span>(bip), <span class="bu">round</span>(bip[<span class="st">"launch_speed"</span>].mean(), <span class="dv">2</span>), barrels, <span class="bu">round</span>(barrels <span class="op">/</span> <span class="bu">len</span>(bip), <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The results:</p>
+<div style="margin: 2rem 0;">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Metric</th>
+<th style="text-align: right;">Before</th>
+<th style="text-align: right;">After</th>
+<th style="text-align: right;">Change</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Average Exit Velocity</td>
+<td style="text-align: right;">88.88 mph</td>
+<td style="text-align: right;">90.15 mph</td>
+<td style="text-align: right;">+1.27 mph</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Barrel Rate</td>
+<td style="text-align: right;">8.0%</td>
+<td style="text-align: right;">15.2%</td>
+<td style="text-align: right;">+7.2 pp</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The increase in average exit velocity was relatively modest, but the improvement in barrel rate was more substantial.</p>
+<p>This suggests that PCA wasn’t necessarily hitting the ball dramatically harder. Instead, he was producing a greater proportion of high-quality contact.</p>
+<p>To visualize the distribution of his exit velocities, I created a violin plot comparing the two periods.</p>
+<div style="margin: 2.5rem 0; text-align: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Fig2.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<figcaption>Changes in exit velocity and contact quality following his mechanical adjustments.</figcaption>
+</figure>
+</div>
+<p><em>Figure 2. Distribution of Crow-Armstrong’s exit velocities before and after the turnaround. Black lines indicate means; white lines indicate medians.</em></p>
+</div>
+<p>A small increase in average exit velocity usually doesn’t mean that a hitter has fundamentally chaned his contact quality. However, when combined with a much higher barrel rate, it provides stronger evidence that PCA was producing more productive contact.</p>
+</section>
+</section>
+<section id="tracking-the-transformation-month-by-month" class="level2">
+<h2 class="anchored" data-anchor-id="tracking-the-transformation-month-by-month">4. Tracking the Transformation Month by Month</h2>
+<p>The before-and-after comparison provides a useful snapshot, but it doesn’t capture the entire progression.</p>
+<p>I also wanted to understand how PCA’s performance evolved throughout the season.</p>
+<p>For this, I calculated monthly wOBA, xwOBA, chase rate, whiff rate, average exit velocity, and barrel rate.</p>
+<section id="building-the-monthly-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="building-the-monthly-metrics">Building the Monthly Metrics</h3>
+<p>Using the <code>swing</code> and <code>whiff</code> columns created earlier, I summarized the relevant statistics for each month:</p>
+<div id="a1d49111" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> balls_in_play(d):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> d[(d[<span class="st">"type"</span>] <span class="op">==</span> <span class="st">"X"</span>) <span class="op">&amp;</span> d[<span class="st">"launch_speed"</span>].notna()]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> summarize(month_data):</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    pa <span class="op">=</span> month_data[month_data[<span class="st">"woba_denom"</span>] <span class="op">==</span> <span class="dv">1</span>]</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    xwoba <span class="op">=</span> pa[<span class="st">"estimated_woba_using_speedangle"</span>].fillna(pa[<span class="st">"woba_value"</span>])</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    out_of_zone <span class="op">=</span> month_data[month_data[<span class="st">"zone"</span>] <span class="op">&gt;=</span> <span class="dv">11</span>]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    bip <span class="op">=</span> balls_in_play(month_data)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.Series({</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"PA"</span>: <span class="bu">len</span>(pa),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"wOBA"</span>: pa[<span class="st">"woba_value"</span>].mean(),</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"xwOBA"</span>: xwoba.mean(),</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"chase_rate"</span>: out_of_zone[<span class="st">"swing"</span>].mean(),</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"whiff_rate"</span>: month_data[<span class="st">"whiff"</span>].<span class="bu">sum</span>() <span class="op">/</span> month_data[<span class="st">"swing"</span>].<span class="bu">sum</span>(),</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"BIP"</span>: <span class="bu">len</span>(bip),</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"avg_EV"</span>: bip[<span class="st">"launch_speed"</span>].mean(),</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"barrel_rate"</span>: (bip[<span class="st">"launch_speed_angle"</span>] <span class="op">==</span> <span class="dv">6</span>).mean(),</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>monthly <span class="op">=</span> df.groupby(<span class="st">"month"</span>).<span class="bu">apply</span>(summarize).<span class="bu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>monthly.index <span class="op">=</span> [calendar.month_abbr[m] <span class="cf">for</span> m <span class="kw">in</span> monthly.index]</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>monthly</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The resulting data shows a particularly interesting progression.</p>
+<div style="margin: 2rem 0;">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Month</th>
+<th style="text-align: right;">PA</th>
+<th style="text-align: right;">wOBA</th>
+<th style="text-align: right;">xwOBA</th>
+<th style="text-align: right;">Chase Rate</th>
+<th style="text-align: right;">Barrel Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">April</td>
+<td style="text-align: right;">126</td>
+<td style="text-align: right;">.296</td>
+<td style="text-align: right;">.286</td>
+<td style="text-align: right;">45.8%</td>
+<td style="text-align: right;">7.6%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">May</td>
+<td style="text-align: right;">122</td>
+<td style="text-align: right;">.342</td>
+<td style="text-align: right;">.404</td>
+<td style="text-align: right;">30.7%</td>
+<td style="text-align: right;">12.8%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">June</td>
+<td style="text-align: right;">123</td>
+<td style="text-align: right;">.513</td>
+<td style="text-align: right;">.399</td>
+<td style="text-align: right;">33.4%</td>
+<td style="text-align: right;">12.3%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">July</td>
+<td style="text-align: right;">108</td>
+<td style="text-align: right;">.427</td>
+<td style="text-align: right;">.361</td>
+<td style="text-align: right;">27.2%</td>
+<td style="text-align: right;">15.3%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">August</td>
+<td style="text-align: right;">131</td>
+<td style="text-align: right;">.440</td>
+<td style="text-align: right;">.396</td>
+<td style="text-align: right;">33.2%</td>
+<td style="text-align: right;">17.6%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">September</td>
+<td style="text-align: right;">107</td>
+<td style="text-align: right;">.380</td>
+<td style="text-align: right;">.400</td>
+<td style="text-align: right;">35.1%</td>
+<td style="text-align: right;">14.5%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="margin: 2.5rem 0; text-align: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Fig4.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<figcaption>Monthly wOBA, xwOBA, Chase Rate, and Barrel Rate</figcaption>
+</figure>
+</div>
+<p><em>Figure 3. Monthly progression of Crow-Armstrong’s offensive production and underlying metrics.</em></p>
+</div>
+<p>April was clearly the low point. PCA posted a .296 wOBA and chased 45.8% of pitches outside the strike zone.</p>
+<p>By May, his chase rate had fallen to 30.7%, while his xwOBA jumped to .404.</p>
+<p>June was the offensive explosion. His actual wOBA reached .513, although his xwOBA remained lower at .399. This distinction is important because it shows that actual production and underlying contact quality don’t always move together.</p>
+<p>July brought his lowest monthly chase rate of the season at 27.2%.</p>
+<p>August was particularly interesting from a contact-quality perspective. His barrel rate reached 7.7%, the highest monthly figure in the dataset.</p>
+<p>By September, his actual production had cooled, but his .400 xwOBA remained strong.</p>
+<p>The overall progression suggests that PCA’s transformation was more than a brief hot streak. His approach improved substantially, and his quality of contact remained elevated throughout the summer.</p>
+</section>
+</section>
+<section id="putting-it-all-together" class="level2">
+<h2 class="anchored" data-anchor-id="putting-it-all-together">5. Putting It All Together</h2>
+<p>PCA’s 2026 season was defined by two complementary adjustments.</p>
+<p>First, he refined his approach at the plate. His chase rate declined by 10.5 percentage points after May 14, while his in-zone swing rate remained virtually unchanged. He became more selective about the pitches he attacked, while maintaining his aggression within the strike zone.</p>
+<p>Second, he reshaped his swing mechanics. His narrower stance, adjusted hand position, and more deliberate stride gave him a new foundation from which to attack pitches.</p>
+<p>The results were reflected in his underlying metrics. His barrel rate increased from 3.9% before the turnaround to 6.6% afterward, while his average exit velocity climbed from 83.62 to 83.97 mph. Together, these changes point to more productive contact.</p>
+<p>By the end of September, Crow-Armstrong had accumulated 45 home runs, 41 stolen bases, and 10.6 fWAR. He became the seventh player in MLB history to join the 40/40 club and unanimously won the National League Most Valuable Player award.</p>
+<p>His season demonstrated how simple adjustments in approach and mechanics can translate into incredible results at the plate. Crow-Armstrong refined his pitch selection, developed a more productive swing, and put together one of the most remarkable seasons in recent baseball history.</p>
+<p>That willingness to adjust may have been what ultimately separated a great season from an MVP season.</p>
+<hr>
+</section>
+<section id="sources-appendix" class="level2">
+<h2 class="anchored" data-anchor-id="sources-appendix">Sources &amp; Appendix</h2>
+<section id="data-sources" class="level3">
+<h3 class="anchored" data-anchor-id="data-sources">Data &amp; Sources</h3>
+<ul>
+<li><a href="https://baseballsavant.mlb.com/">Baseball Savant</a> — Statcast pitch-level data</li>
+<li><a href="https://baseballsavant.mlb.com/savant-player/pete-crow-armstrong-691718">Baseball Savant — Pete Crow-Armstrong</a> — Player Statcast profile</li>
+<li><a href="https://www.mlb.com/news/why-pete-crow-armstrong-s-red-hot-may-is-good-sign">MLB.com — Is PCA back? Why red-hot May could be sign of more good things to come</a> — May performance and approach changes</li>
+<li><a href="https://www.wsj.com/sports/baseball/pete-crow-armstrong-batting-stance-mvp-cubs-dad7d6d5">The Wall Street Journal — The Risky Mechanical Overhaul That Built a Baseball MVP</a> — Mechanical adjustments</li>
+<li><a href="https://www.bleedcubbieblue.com/chicago-cubs-analysis/222774/pete-crow-armstrong-surge-batting-cubs">Bleed Cubbie Blue - Pete Crow-Armstrong’s surge could have been created by something very simple</a> - Date of mechanical adjustments</li>
+</ul>
+</section>
+<section id="statistical-definitions" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-definitions">Statistical Definitions</h3>
+<ul>
+<li><strong>Chase Rate:</strong> Percentage of pitches outside the strike zone at which the hitter swings.</li>
+<li><strong>In-Zone Swing Rate:</strong> Percentage of pitches inside the strike zone at which the hitter swings.</li>
+<li><strong>Whiff Rate:</strong> Percentage of swings that result in a swing and miss.</li>
+<li><strong>wOBA:</strong> Weighted On-Base Average, measuring offensive production by assigning different values to different outcomes.</li>
+<li><strong>xwOBA:</strong> Expected Weighted On-Base Average, estimating offensive production based primarily on quality of contact.</li>
+<li><strong>Exit Velocity:</strong> Speed of the baseball immediately after contact.</li>
+<li><strong>Barrel Rate:</strong> Percentage of batted balls classified as barrels by Statcast.</li>
+</ul>
+<hr>
+<p><em>Joey Ran the Stats explores baseball through data, statistics, and analysis. The complete code accompanying this article is available on <a href="https://github.com/JoeyZeee/JRTS-1">GitHub</a>.</em></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/joeyzeee\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "JoeyZeee/JoeyZeee.github.io";
+    script.dataset.repoId = "R_kgDOOfu_tw";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDOOfu_t84DLod3";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 Joey</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const progress = document.createElement("div");
+  progress.id = "reading-progress";
+  document.body.appendChild(progress);
+
+  function updateProgress() {
+    const scrollable =
+      document.documentElement.scrollHeight - window.innerHeight;
+
+    const percentage = scrollable > 0
+      ? window.scrollY / scrollable
+      : 0;
+
+    progress.style.width = `${percentage * 100}%`;
+  }
+
+  window.addEventListener("scroll", updateProgress, {
+    passive: true
+  });
+
+  window.addEventListener("resize", updateProgress);
+  updateProgress();
+});
+</script>
+
+
+
+
+</body></html>

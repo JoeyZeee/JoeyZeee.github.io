@@ -10,7 +10,738 @@
 <atom:link href="https://joeyzeee.github.io/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.11.9</generator>
-<lastBuildDate>Thu, 19 Nov 2026 06:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 27 Nov 2026 06:00:00 GMT</lastBuildDate>
+<item>
+  <title>Inside Pete Crow-Armstrong’s MVP Transformation</title>
+  <link>https://joeyzeee.github.io/posts/Inside-Pete-Crow-Armstrongs-MVP-Transformation/</link>
+  <description><![CDATA[ 
+<a class="back-link" href="../../">← Back to all posts</a>
+
+
+
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://joeyzeee.github.io/posts/Inside-Pete-Crow-Armstrongs-MVP-Transformation/PeteCrow.jpg" class="img-fluid figure-img" style="width:100.0%" alt="Pete Crow-Armstrong of the Chicago Cubs"></p>
+<figcaption>Pete Crow-Armstrong celebrates during a game against the Colorado Rockies at Wrigley Field on June 16, 2026.</figcaption>
+</figure>
+</div>
+<p><small>CHICAGO, ILLINOIS – JUNE 16: Pete Crow-Armstrong #4 of the Chicago Cubs points toward the field during a matchup against the Colorado Rockies at Wrigley Field on June 16, 2026, in Chicago, Illinois. Photo by Matt Dirksen/Chicago Cubs/Getty Images.</small></p>
+<section id="from-a-slow-start-to-an-mvp-season" class="level2">
+<h2 class="anchored" data-anchor-id="from-a-slow-start-to-an-mvp-season">From a Slow Start to an MVP Season</h2>
+<p>Pete Crow-Armstrong had a season most baseball players can only dream of.</p>
+<p>In 2026, the Chicago Cubs center fielder hit <strong>45 home runs, stole 41 bases, drove in 107 runs, and posted a .280/.372/.570 slash line</strong>. He became just the seventh player in Major League Baseball history to join the coveted 40/40 club, his 10.6 fWAR led all of baseball, and the historic campaign earned him a unanimous National League Most Valuable Player award.</p>
+<p>But just a few months earlier, many Cubs fans were calling for Crow-Armstrong to be benched due to his inconsistency at the plate. His aggressive approach left him vulnerable to pitches outside the strike zone, and his existing swing mechanics weren’t consistently translating his considerable athleticism into productive contact.</p>
+<p>Then, something drastic changed.</p>
+<p>In May, PCA made a series of adjustments that would fundamentally reshape his season. He narrowed his stance, moved closer to the plate, repositioned his hands, and completely altered his mental approach to his at-bats.</p>
+<p>So, how exactly did a hitter who struggled through the opening month of the season become the most valuable player in the National League?</p>
+<p><strong>Well, Joey Ran the Stats.</strong></p>
+<p>Using Python and Statcast pitch-level data, I wanted to investigate two parts of PCA’s transformation. The snippets below highlight the key steps; the complete code, including the visualization work, is available on GitHub.</p>
+<ol type="1">
+<li><strong>The mental shift:</strong> Did he actually become more selective at the plate, and could that change be quantified?</li>
+<li><strong>The mechanical shift:</strong> Did his mechanical adjustments translate into better contact quality?</li>
+</ol>
+<p>Rather than simply comparing his statistics at the beginning and end of the season, I wanted to examine the individual pitches that make up those statistics. By looking at his swing decisions, pitch locations, and batted-ball outcomes, we can get a much better understanding of what actually changed, and how sustainable this production is.</p>
+</section>
+<section id="building-the-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="building-the-dataset">1. Building the Dataset</h2>
+<p>Before analyzing anything, I needed the data.</p>
+<p>I used the <code>pybaseball</code> library to retrieve Statcast data directly from Baseball Savant. Specifically, I pulled every pitch recorded for Crow-Armstrong throughout the 2026 regular season.</p>
+<p>The dataset includes information about each pitch, including its location, velocity, outcome, and the resulting batted-ball measurements.</p>
+<section id="retrieving-statcast-data" class="level3">
+<h3 class="anchored" data-anchor-id="retrieving-statcast-data">Retrieving Statcast Data</h3>
+<p>I started by importing the libraries needed for the analysis and retrieving PCA’s pitch-level data using his MLBAM player ID.</p>
+<div id="62d45b19" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> pybaseball <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> statcast_batter, cache</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pandas <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> pd</span>
+<span id="cb1-3"></span>
+<span id="cb1-4">cache.enable()</span>
+<span id="cb1-5"></span>
+<span id="cb1-6">PCA_ID <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">691718</span></span>
+<span id="cb1-7">df <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> statcast_batter(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2026-03-20"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2026-10-05"</span>, PCA_ID)</span>
+<span id="cb1-8">df <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> df[df[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"game_type"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"R"</span>].copy()</span>
+<span id="cb1-9"></span>
+<span id="cb1-10">df[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"game_date"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pd.to_datetime(df[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"game_date"</span>])</span>
+<span id="cb1-11">df[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"month"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> df[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"game_date"</span>].dt.month.clip(lower<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>)</span></code></pre></div></div>
+</div>
+<p>This returned <strong>2,922 pitches</strong>, covering March 26 through September 27.</p>
+<p>I also grouped the late-March games into April so that the monthly comparisons would be easier to interpret.</p>
+<p>With the dataset ready, I could start examining the two major components of PCA’s transformation.</p>
+</section>
+</section>
+<section id="the-mental-shift-becoming-a-more-selective-hitter" class="level2">
+<h2 class="anchored" data-anchor-id="the-mental-shift-becoming-a-more-selective-hitter">2. The Mental Shift: Becoming a More Selective Hitter</h2>
+<p>One of the biggest changes in PCA’s approach was his ability to recognize which pitches deserved his aggression.</p>
+<p>In 2025, his chase rate was 41.7%, meaning he swung at more than four out of every ten pitches outside the strike zone.</p>
+<p>That tendency gave pitchers an easy way to attack him. Rather than challenging him directly, they could expand the strike zone and rely on his willingness to chase.</p>
+<p>In May 2026, however, his approach began to change. MLB reported that his strikeout rate dropped from 29.7% in March and April to 21.3% in May. His whiff rate also fell from 29.9% to 23.7%.</p>
+<p>I wanted to see whether these improvements were reflected in the actual pitches he chose to swing at.</p>
+<section id="defining-swing-decisions" class="level3">
+<h3 class="anchored" data-anchor-id="defining-swing-decisions">Defining Swing Decisions</h3>
+<p>The first step was identifying which pitches resulted in a swing and which resulted in a miss.</p>
+<p>Statcast records pitch outcomes through the <code>description</code> column. I created two lists to classify these outcomes.</p>
+<p>These Boolean columns allowed me to calculate swing and whiff rates directly from the pitch-level data.</p>
+<p>For example, the swing rate is simply the percentage of pitches on which PCA swung. Chase rate is the percentage of pitches outside the strike zone on which he swung.</p>
+</section>
+<section id="finding-the-turning-point" class="level3">
+<h3 class="anchored" data-anchor-id="finding-the-turning-point">Finding the Turning Point</h3>
+<p>I chose May 14 as the dividing point for my before-and-after analysis, because that’s when <em>Bleed Cubbie Blue</em> reported that Crow-Armstrong changed his batting stance.</p>
+<p>This gave me two samples:</p>
+<ul>
+<li>Before: 641 pitches</li>
+<li>After: 2,281 pitches</li>
+</ul>
+<p>I then calculated the swing rate, chase rate, and whiff rate for each period:</p>
+<div id="5eace2ba" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">SWINGS <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [</span>
+<span id="cb2-2">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"swinging_strike"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"swinging_strike_blocked"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"foul"</span>,</span>
+<span id="cb2-3">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"foul_tip"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"hit_into_play"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"foul_bunt"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"missed_bunt"</span></span>
+<span id="cb2-4">]</span>
+<span id="cb2-5">WHIFFS <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"swinging_strike"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"swinging_strike_blocked"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"missed_bunt"</span>]</span>
+<span id="cb2-6"></span>
+<span id="cb2-7">df[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"swing"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> df[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"description"</span>].isin(SWINGS)</span>
+<span id="cb2-8">df[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"whiff"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> df[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"description"</span>].isin(WHIFFS)</span>
+<span id="cb2-9"></span>
+<span id="cb2-10">turnaround <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2026-05-14"</span></span>
+<span id="cb2-11">before <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> df[df[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"game_date"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> turnaround]</span>
+<span id="cb2-12">after <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> df[df[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"game_date"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> turnaround]</span>
+<span id="cb2-13"></span>
+<span id="cb2-14"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> label, sample <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> [(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Before"</span>, before), (<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"After"</span>, after)]:</span>
+<span id="cb2-15">    out_of_zone <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> sample[sample[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"zone"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">11</span>]</span>
+<span id="cb2-16"></span>
+<span id="cb2-17">    swing_rate <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> sample[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"swing"</span>].mean()</span>
+<span id="cb2-18">    chase_rate <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> out_of_zone[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"swing"</span>].mean()</span>
+<span id="cb2-19">    whiff_rate <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> sample[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"whiff"</span>].<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">sum</span>() <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> sample[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"swing"</span>].<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">sum</span>()</span>
+<span id="cb2-20"></span>
+<span id="cb2-21">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(label, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">round</span>(swing_rate, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>), <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">round</span>(chase_rate, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>), <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">round</span>(whiff_rate, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>))</span></code></pre></div></div>
+</div>
+<p>The results were particularly interesting.</p>
+<div style="margin: 2rem 0;">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Metric</th>
+<th style="text-align: right;">Before</th>
+<th style="text-align: right;">After</th>
+<th style="text-align: right;">Change</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Swing Rate</td>
+<td style="text-align: right;">54.8%</td>
+<td style="text-align: right;">48.2%</td>
+<td style="text-align: right;">-6.6 pp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chase Rate</td>
+<td style="text-align: right;">42.4%</td>
+<td style="text-align: right;">31.9%</td>
+<td style="text-align: right;">-10.5 pp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Whiff Rate</td>
+<td style="text-align: right;">25.4%</td>
+<td style="text-align: right;">23.8%</td>
+<td style="text-align: right;">-1.6 pp</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The most important number is his chase rate.</p>
+<p>After May 14, PCA chased pitches outside the strike zone just 31.9% of the time, compared with 42.4% beforehand.</p>
+<p>But his overall swing rate also declined, which raises an important question: Was he simply becoming more passive?</p>
+<p>To answer that, I needed to distinguish between pitches inside and outside the strike zone.</p>
+<p>This produced an even more revealing comparison.</p>
+<div style="margin: 2rem 0;">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Metric</th>
+<th style="text-align: right;">Before</th>
+<th style="text-align: right;">After</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">In-Zone Swing Rate</td>
+<td style="text-align: right;">70.3%</td>
+<td style="text-align: right;">68.1%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Share of Swings in the Zone</td>
+<td style="text-align: right;">58.1%</td>
+<td style="text-align: right;">64.6%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>PCA’s in-zone swing rate dipped only slightly, from 70.3% to 68.1%, while the share of his swings that came on strikes rose from 58.1% to 64.6%.</p>
+<p>So, he was still attacking roughly the same proportion of strikes, the only difference was that he was becoming much less willing to chase pitches outside the zone.</p>
+<p>In other words, his mental shift hadn’t caused him to become a passive hitter, it just made him become a more selective hitter.</p>
+</section>
+<section id="visualizing-his-swing-decisions" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-his-swing-decisions">Visualizing His Swing Decisions</h3>
+<p>Percentages are useful, but they don’t necessarily tell the entire story. I also wanted to see where PCA was actually swinging.</p>
+<p>Using Statcast’s <code>plate_x</code> and <code>plate_z</code> variables, I plotted the horizontal and vertical locations of every pitch he saw. I separated pitches he swung at from pitches he took, then created two plots to compare the periods.</p>
+<div style="margin: 2.5rem 0; text-align: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://joeyzeee.github.io/posts/Inside-Pete-Crow-Armstrongs-MVP-Transformation/Fig1.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<figcaption>Pitch locations showing the change in Crow-Armstrong’s approach at the plate.</figcaption>
+</figure>
+</div>
+<p><em>Figure 1. Pitch locations where Crow-Armstrong swung and took pitches before and after May 14.</em></p>
+</div>
+<p>In figure 1, the change is clear. In the left panel, from before May 14, blue swing dots stray well outside the box, especially below the zone and off the edges. In the right panel, the swings pack into the strike zone, and the pitches around it, particularly the ones up and out of the zone, are mostly orange takes.</p>
+</section>
+</section>
+<section id="the-mechanical-shift-turning-better-decisions-into-better-contact" class="level2">
+<h2 class="anchored" data-anchor-id="the-mechanical-shift-turning-better-decisions-into-better-contact">3. The Mechanical Shift: Turning Better Decisions Into Better Contact</h2>
+<p>While PCA was changing his approach at the plate, he was also making substantial mechanical adjustments.</p>
+<p>As reported by <em>The Wall Street Journal</em> in September, the overhaul included several changes to his starting position:</p>
+<ul>
+<li><strong>Narrower stance:</strong> Reduced the distance between his feet from approximately 31.5 inches to 18–19 inches.</li>
+<li><strong>Box positioning:</strong> Moved closer to the plate and deeper into the batter’s box, adopting a more upright stance.</li>
+<li><strong>Hand position:</strong> Lowered his hands from shoulder level to below his chest, near his belt.</li>
+<li><strong>Bat angle:</strong> Raised the bat to a more upright position, creating a shorter, more direct path to the ball.</li>
+<li><strong>Stride and leg kick:</strong> Reintroduced a more deliberate stride and leg kick, which became more pronounced into June.</li>
+</ul>
+<p>The adjustments were intended to give him a more controlled starting position and help him consistently get into positions where he could drive the baseball.</p>
+<p>But did the changes actually translate into better contact?</p>
+<p>I wanted to investigate this using two metrics: exit velocity and barrel rate.</p>
+<section id="measuring-contact-quality" class="level3">
+<h3 class="anchored" data-anchor-id="measuring-contact-quality">Measuring Contact Quality</h3>
+<p>Exit velocity measures how hard a baseball is hit. Barrel rate measures how frequently a hitter produces contact with an especially productive combination of exit velocity and launch angle.</p>
+<p>Together, they provide a useful way to examine whether PCA was simply making more contact or actually hitting the ball more effectively.</p>
+<p>I started by comparing his batted-ball data before and after May 14. Both metrics use balls in play only, which matches how Baseball Savant reports them.</p>
+<div id="b2d9e66c" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> balls_in_play(data):</span>
+<span id="cb3-2">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> data[(data[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"X"</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> data[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"launch_speed"</span>].notna()]</span>
+<span id="cb3-3"></span>
+<span id="cb3-4"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> label, sample <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> [(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Before"</span>, before), (<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"After"</span>, after)]:</span>
+<span id="cb3-5">    bip <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> balls_in_play(sample)</span>
+<span id="cb3-6">    barrels <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> (bip[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"launch_speed_angle"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>).<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">sum</span>()</span>
+<span id="cb3-7"></span>
+<span id="cb3-8">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(label, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(bip), <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">round</span>(bip[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"launch_speed"</span>].mean(), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>), barrels, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">round</span>(barrels <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(bip), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>))</span></code></pre></div></div>
+</div>
+<p>The results:</p>
+<div style="margin: 2rem 0;">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Metric</th>
+<th style="text-align: right;">Before</th>
+<th style="text-align: right;">After</th>
+<th style="text-align: right;">Change</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Average Exit Velocity</td>
+<td style="text-align: right;">88.88 mph</td>
+<td style="text-align: right;">90.15 mph</td>
+<td style="text-align: right;">+1.27 mph</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Barrel Rate</td>
+<td style="text-align: right;">8.0%</td>
+<td style="text-align: right;">15.2%</td>
+<td style="text-align: right;">+7.2 pp</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The increase in average exit velocity was relatively modest, but the improvement in barrel rate was more substantial.</p>
+<p>This suggests that PCA wasn’t necessarily hitting the ball dramatically harder. Instead, he was producing a greater proportion of high-quality contact.</p>
+<p>To visualize the distribution of his exit velocities, I created a violin plot comparing the two periods.</p>
+<div style="margin: 2.5rem 0; text-align: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://joeyzeee.github.io/posts/Inside-Pete-Crow-Armstrongs-MVP-Transformation/Fig2.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<figcaption>Changes in exit velocity and contact quality following his mechanical adjustments.</figcaption>
+</figure>
+</div>
+<p><em>Figure 2. Distribution of Crow-Armstrong’s exit velocities before and after the turnaround. Black lines indicate means; white lines indicate medians.</em></p>
+</div>
+<p>A small increase in average exit velocity usually doesn’t mean that a hitter has fundamentally chaned his contact quality. However, when combined with a much higher barrel rate, it provides stronger evidence that PCA was producing more productive contact.</p>
+</section>
+</section>
+<section id="tracking-the-transformation-month-by-month" class="level2">
+<h2 class="anchored" data-anchor-id="tracking-the-transformation-month-by-month">4. Tracking the Transformation Month by Month</h2>
+<p>The before-and-after comparison provides a useful snapshot, but it doesn’t capture the entire progression.</p>
+<p>I also wanted to understand how PCA’s performance evolved throughout the season.</p>
+<p>For this, I calculated monthly wOBA, xwOBA, chase rate, whiff rate, average exit velocity, and barrel rate.</p>
+<section id="building-the-monthly-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="building-the-monthly-metrics">Building the Monthly Metrics</h3>
+<p>Using the <code>swing</code> and <code>whiff</code> columns created earlier, I summarized the relevant statistics for each month:</p>
+<div id="a1d49111" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> balls_in_play(d):</span>
+<span id="cb4-2">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> d[(d[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"X"</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> d[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"launch_speed"</span>].notna()]</span>
+<span id="cb4-3"></span>
+<span id="cb4-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> summarize(month_data):</span>
+<span id="cb4-5">    pa <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> month_data[month_data[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"woba_denom"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]</span>
+<span id="cb4-6">    xwoba <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pa[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"estimated_woba_using_speedangle"</span>].fillna(pa[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"woba_value"</span>])</span>
+<span id="cb4-7">    out_of_zone <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> month_data[month_data[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"zone"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">11</span>]</span>
+<span id="cb4-8">    bip <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> balls_in_play(month_data)</span>
+<span id="cb4-9"></span>
+<span id="cb4-10">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> pd.Series({</span>
+<span id="cb4-11">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PA"</span>: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(pa),</span>
+<span id="cb4-12">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"wOBA"</span>: pa[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"woba_value"</span>].mean(),</span>
+<span id="cb4-13">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"xwOBA"</span>: xwoba.mean(),</span>
+<span id="cb4-14">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"chase_rate"</span>: out_of_zone[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"swing"</span>].mean(),</span>
+<span id="cb4-15">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"whiff_rate"</span>: month_data[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"whiff"</span>].<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">sum</span>() <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> month_data[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"swing"</span>].<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">sum</span>(),</span>
+<span id="cb4-16">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"BIP"</span>: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(bip),</span>
+<span id="cb4-17">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"avg_EV"</span>: bip[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"launch_speed"</span>].mean(),</span>
+<span id="cb4-18">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"barrel_rate"</span>: (bip[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"launch_speed_angle"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>).mean(),</span>
+<span id="cb4-19">    })</span>
+<span id="cb4-20"></span>
+<span id="cb4-21">monthly <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> df.groupby(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"month"</span>).<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">apply</span>(summarize).<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">round</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)</span>
+<span id="cb4-22"></span>
+<span id="cb4-23">monthly.index <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [calendar.month_abbr[m] <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> m <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> monthly.index]</span>
+<span id="cb4-24"></span>
+<span id="cb4-25">monthly</span></code></pre></div></div>
+</div>
+<p>The resulting data shows a particularly interesting progression.</p>
+<div style="margin: 2rem 0;">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Month</th>
+<th style="text-align: right;">PA</th>
+<th style="text-align: right;">wOBA</th>
+<th style="text-align: right;">xwOBA</th>
+<th style="text-align: right;">Chase Rate</th>
+<th style="text-align: right;">Barrel Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">April</td>
+<td style="text-align: right;">126</td>
+<td style="text-align: right;">.296</td>
+<td style="text-align: right;">.286</td>
+<td style="text-align: right;">45.8%</td>
+<td style="text-align: right;">7.6%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">May</td>
+<td style="text-align: right;">122</td>
+<td style="text-align: right;">.342</td>
+<td style="text-align: right;">.404</td>
+<td style="text-align: right;">30.7%</td>
+<td style="text-align: right;">12.8%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">June</td>
+<td style="text-align: right;">123</td>
+<td style="text-align: right;">.513</td>
+<td style="text-align: right;">.399</td>
+<td style="text-align: right;">33.4%</td>
+<td style="text-align: right;">12.3%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">July</td>
+<td style="text-align: right;">108</td>
+<td style="text-align: right;">.427</td>
+<td style="text-align: right;">.361</td>
+<td style="text-align: right;">27.2%</td>
+<td style="text-align: right;">15.3%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">August</td>
+<td style="text-align: right;">131</td>
+<td style="text-align: right;">.440</td>
+<td style="text-align: right;">.396</td>
+<td style="text-align: right;">33.2%</td>
+<td style="text-align: right;">17.6%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">September</td>
+<td style="text-align: right;">107</td>
+<td style="text-align: right;">.380</td>
+<td style="text-align: right;">.400</td>
+<td style="text-align: right;">35.1%</td>
+<td style="text-align: right;">14.5%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="margin: 2.5rem 0; text-align: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://joeyzeee.github.io/posts/Inside-Pete-Crow-Armstrongs-MVP-Transformation/Fig4.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<figcaption>Monthly wOBA, xwOBA, Chase Rate, and Barrel Rate</figcaption>
+</figure>
+</div>
+<p><em>Figure 3. Monthly progression of Crow-Armstrong’s offensive production and underlying metrics.</em></p>
+</div>
+<p>April was clearly the low point. PCA posted a .296 wOBA and chased 45.8% of pitches outside the strike zone.</p>
+<p>By May, his chase rate had fallen to 30.7%, while his xwOBA jumped to .404.</p>
+<p>June was the offensive explosion. His actual wOBA reached .513, although his xwOBA remained lower at .399. This distinction is important because it shows that actual production and underlying contact quality don’t always move together.</p>
+<p>July brought his lowest monthly chase rate of the season at 27.2%.</p>
+<p>August was particularly interesting from a contact-quality perspective. His barrel rate reached 7.7%, the highest monthly figure in the dataset.</p>
+<p>By September, his actual production had cooled, but his .400 xwOBA remained strong.</p>
+<p>The overall progression suggests that PCA’s transformation was more than a brief hot streak. His approach improved substantially, and his quality of contact remained elevated throughout the summer.</p>
+</section>
+</section>
+<section id="putting-it-all-together" class="level2">
+<h2 class="anchored" data-anchor-id="putting-it-all-together">5. Putting It All Together</h2>
+<p>PCA’s 2026 season was defined by two complementary adjustments.</p>
+<p>First, he refined his approach at the plate. His chase rate declined by 10.5 percentage points after May 14, while his in-zone swing rate remained virtually unchanged. He became more selective about the pitches he attacked, while maintaining his aggression within the strike zone.</p>
+<p>Second, he reshaped his swing mechanics. His narrower stance, adjusted hand position, and more deliberate stride gave him a new foundation from which to attack pitches.</p>
+<p>The results were reflected in his underlying metrics. His barrel rate increased from 3.9% before the turnaround to 6.6% afterward, while his average exit velocity climbed from 83.62 to 83.97 mph. Together, these changes point to more productive contact.</p>
+<p>By the end of September, Crow-Armstrong had accumulated 45 home runs, 41 stolen bases, and 10.6 fWAR. He became the seventh player in MLB history to join the 40/40 club and unanimously won the National League Most Valuable Player award.</p>
+<p>His season demonstrated how simple adjustments in approach and mechanics can translate into incredible results at the plate. Crow-Armstrong refined his pitch selection, developed a more productive swing, and put together one of the most remarkable seasons in recent baseball history.</p>
+<p>That willingness to adjust may have been what ultimately separated a great season from an MVP season.</p>
+<hr>
+</section>
+<section id="sources-appendix" class="level2">
+<h2 class="anchored" data-anchor-id="sources-appendix">Sources &amp; Appendix</h2>
+<section id="data-sources" class="level3">
+<h3 class="anchored" data-anchor-id="data-sources">Data &amp; Sources</h3>
+<ul>
+<li><a href="https://baseballsavant.mlb.com/">Baseball Savant</a> — Statcast pitch-level data</li>
+<li><a href="https://baseballsavant.mlb.com/savant-player/pete-crow-armstrong-691718">Baseball Savant — Pete Crow-Armstrong</a> — Player Statcast profile</li>
+<li><a href="https://www.mlb.com/news/why-pete-crow-armstrong-s-red-hot-may-is-good-sign">MLB.com — Is PCA back? Why red-hot May could be sign of more good things to come</a> — May performance and approach changes</li>
+<li><a href="https://www.wsj.com/sports/baseball/pete-crow-armstrong-batting-stance-mvp-cubs-dad7d6d5">The Wall Street Journal — The Risky Mechanical Overhaul That Built a Baseball MVP</a> — Mechanical adjustments</li>
+<li><a href="https://www.bleedcubbieblue.com/chicago-cubs-analysis/222774/pete-crow-armstrong-surge-batting-cubs">Bleed Cubbie Blue - Pete Crow-Armstrong’s surge could have been created by something very simple</a> - Date of mechanical adjustments</li>
+</ul>
+</section>
+<section id="statistical-definitions" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-definitions">Statistical Definitions</h3>
+<ul>
+<li><strong>Chase Rate:</strong> Percentage of pitches outside the strike zone at which the hitter swings.</li>
+<li><strong>In-Zone Swing Rate:</strong> Percentage of pitches inside the strike zone at which the hitter swings.</li>
+<li><strong>Whiff Rate:</strong> Percentage of swings that result in a swing and miss.</li>
+<li><strong>wOBA:</strong> Weighted On-Base Average, measuring offensive production by assigning different values to different outcomes.</li>
+<li><strong>xwOBA:</strong> Expected Weighted On-Base Average, estimating offensive production based primarily on quality of contact.</li>
+<li><strong>Exit Velocity:</strong> Speed of the baseball immediately after contact.</li>
+<li><strong>Barrel Rate:</strong> Percentage of batted balls classified as barrels by Statcast.</li>
+</ul>
+<hr>
+<p><em>Joey Ran the Stats explores baseball through data, statistics, and analysis. The complete code accompanying this article is available on <a href="https://github.com/JoeyZeee/JRTS-1">GitHub</a>.</em></p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>Player Analysis</category>
+  <category>Baseball Analytics</category>
+  <category>Chicago Cubs</category>
+  <guid>https://joeyzeee.github.io/posts/Inside-Pete-Crow-Armstrongs-MVP-Transformation/</guid>
+  <pubDate>Fri, 27 Nov 2026 06:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Welcome!</title>
   <link>https://joeyzeee.github.io/posts/welcome/</link>
