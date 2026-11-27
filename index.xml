@@ -52,7 +52,7 @@
 <section id="retrieving-statcast-data" class="level3">
 <h3 class="anchored" data-anchor-id="retrieving-statcast-data">Retrieving Statcast Data</h3>
 <p>I started by importing the libraries needed for the analysis and retrieving PCA’s pitch-level data using his MLBAM player ID.</p>
-<div id="62d45b19" class="cell" data-execution_count="1">
+<div id="5a55c493" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> pybaseball <span class="im" style="color: #00769E;
@@ -135,7 +135,7 @@ font-style: inherit;">4</span>)</span></code></pre></div></div>
 <li>After: 2,281 pitches</li>
 </ul>
 <p>I then calculated the swing rate, chase rate, and whiff rate for each period:</p>
-<div id="5eace2ba" class="cell" data-execution_count="2">
+<div id="a27b6bf0" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">SWINGS <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> [</span>
@@ -362,7 +362,7 @@ font-style: inherit;">3</span>))</span></code></pre></div></div>
 <p>Exit velocity measures how hard a baseball is hit. Barrel rate measures how frequently a hitter produces contact with an especially productive combination of exit velocity and launch angle.</p>
 <p>Together, they provide a useful way to examine whether PCA was simply making more contact or actually hitting the ball more effectively.</p>
 <p>I started by comparing his batted-ball data before and after May 14. Both metrics use balls in play only, which matches how Baseball Savant reports them.</p>
-<div id="b2d9e66c" class="cell" data-execution_count="3">
+<div id="17488539" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -478,7 +478,7 @@ font-style: inherit;">3</span>))</span></code></pre></div></div>
 <section id="building-the-monthly-metrics" class="level3">
 <h3 class="anchored" data-anchor-id="building-the-monthly-metrics">Building the Monthly Metrics</h3>
 <p>Using the <code>swing</code> and <code>whiff</code> columns created earlier, I summarized the relevant statistics for each month:</p>
-<div id="a1d49111" class="cell" data-execution_count="4">
+<div id="223b1974" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -689,7 +689,7 @@ font-style: inherit;">in</span> monthly.index]</span>
 <p>By May, his chase rate had fallen to 30.7%, while his xwOBA jumped to .404.</p>
 <p>June was the offensive explosion. His actual wOBA reached .513, although his xwOBA remained lower at .399. This distinction is important because it shows that actual production and underlying contact quality don’t always move together.</p>
 <p>July brought his lowest monthly chase rate of the season at 27.2%.</p>
-<p>August was particularly interesting from a contact-quality perspective. His barrel rate reached 7.7%, the highest monthly figure in the dataset.</p>
+<p>August was particularly interesting from a contact-quality perspective. His barrel rate reached 17.6%, the highest monthly figure in the dataset.</p>
 <p>By September, his actual production had cooled, but his .400 xwOBA remained strong.</p>
 <p>The overall progression suggests that PCA’s transformation was more than a brief hot streak. His approach improved substantially, and his quality of contact remained elevated throughout the summer.</p>
 </section>
@@ -699,7 +699,7 @@ font-style: inherit;">in</span> monthly.index]</span>
 <p>PCA’s 2026 season was defined by two complementary adjustments.</p>
 <p>First, he refined his approach at the plate. His chase rate declined by 10.5 percentage points after May 14, while his in-zone swing rate remained virtually unchanged. He became more selective about the pitches he attacked, while maintaining his aggression within the strike zone.</p>
 <p>Second, he reshaped his swing mechanics. His narrower stance, adjusted hand position, and more deliberate stride gave him a new foundation from which to attack pitches.</p>
-<p>The results were reflected in his underlying metrics. His barrel rate increased from 3.9% before the turnaround to 6.6% afterward, while his average exit velocity climbed from 83.62 to 83.97 mph. Together, these changes point to more productive contact.</p>
+<p>The results were reflected in his underlying metrics. His barrel rate nearly doubled, from 8.0% before May 14 to 15.2% afterward, while his average exit velocity climbed from 88.9 to 90.1 mph. Together, these changes point to more productive contact.</p>
 <p>By the end of September, Crow-Armstrong had accumulated 45 home runs, 41 stolen bases, and 10.6 fWAR. He became the seventh player in MLB history to join the 40/40 club and unanimously won the National League Most Valuable Player award.</p>
 <p>His season demonstrated how simple adjustments in approach and mechanics can translate into incredible results at the plate. Crow-Armstrong refined his pitch selection, developed a more productive swing, and put together one of the most remarkable seasons in recent baseball history.</p>
 <p>That willingness to adjust may have been what ultimately separated a great season from an MVP season.</p>
